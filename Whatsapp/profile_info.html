@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="hsl(170,100%,23%)">
+    <link rel="stylesheet" href="css/profile_info.css">
+    <title>Profile_info</title>
+ 
+</head>
+
+<body onload="limit()">
+    <h4 class="profileinfo">Profile info</h4>
+    <p class="noti1">Please provide your name and a optional profile<br>photo</p>
+
+    <div>
+        <img onclick="alert('You cannot change profile picture.')" class="profilepic" src="icons/dark_rose.png">
+        <input oninput="check()" value="FADY AMER" type="text" onclick="kbd()" id="input"
+            onfocus="this.value = this.value;" autofocus="autofocus">
+        <p id="inputno">16</p>
+        <img id="emoji" src="icons/ic_btn_emoji.png" onclick="clicked()">
+    </div>
+    <div class="line"></div>
+
+    <a href="initz.html"><button id="next">NEXT</button></a>
+
+    <div id="emojidiv">
+        <h1 id="emojinoti"> Emojis are not available<br>right now.</h1>
+        <img id="bigemoji" src="icons/emoji_searching.png">
+        <p id="emojinoti1">Will be available in next versions.</p>
+    </div>
+
+
+<script src="js/profile_info.js"></script>
+</body>
+
+
+
+</html>
