@@ -1,0 +1,68 @@
+hr {
+    display: inline-block;
+}
+
+.hrcode {
+    display: inline-block;
+    border-style: inset;
+    border-width: .6px;
+    border-color: hsl(170, 100%, 35%);
+}
+
+.hrcode {
+    width: 13%;
+    border-color: hsl(170, 100%, 35%);
+}
+
+.hrno {
+    display: inline-block;
+    height: .6vw;
+    width: 62%;
+    margin-left: 6vw;
+    background-color: hsl(170, 100%, 30%);
+}
+
+input {
+    margin-left: 10vw;
+    border: none;
+    outline: none;
+    text-align: left;
+    font-size: 5vw;
+    font-weight: 400;
+}
+
+.ulcountru {
+    width: 80%;
+    margin-left: 50px;
+    margin-right: 50px;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: .7px;
+    border-color: hsl(170, 100%, 35%);
+}
+
+.code {
+    display: inline-block;
+    font-size: 5vw;
+    font-weight: 400;
+    margin-top: 4vw;
+}
+
+.country {
+    font-size: 5vw;
+    font-weight: 400;
+    margin-top: 4.5vw;
+}
+
+.noti1 {
+    color: black;
+}
+
+.btn2:hover {
+    background-color: hsla(135, 100%, 40%, 0.7);
+    box-shadow: 1px 3px 2px 1px #cccccc;
+}

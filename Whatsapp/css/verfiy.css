@@ -1,0 +1,161 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-family: orbitorn;
+}
+.verify {
+  color: hsl(170, 100%, 28%);
+  font-size: 5.5vw;
+  padding-top: 5vw;
+}
+.waiting {
+  font-size: 4vw;
+  padding-top: 8vw;
+}
+#black {
+  color: black;
+  line-height: 6vw;
+}
+.otp {
+  text-align: left;
+  padding-left: 10vw;
+  font-size: 7vw;
+  letter-spacing: 4vw;
+  margin-left: 0vw;
+  width: 50vw;
+  height: 10vw;
+  margin-top: 5vw;
+  border: none;
+  outline: none;
+}
+.line {
+  width: 50%;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  border-color: hsl(170, 100%, 35%);
+}
+img {
+  display: inline-block;
+  width: 7.5vw;
+  margin-bottom: -2.5vw;
+}
+#sms,
+#sms2 {
+  display: inline-block;
+  color: #808080;
+  font-weight: 600;
+  padding-bottom: 5vw;
+  padding-top: 3vw;
+  font-size: 4vw;
+  padding-left: 6vw;
+}
+#h,
+#r {
+  display: inline-block;
+  color: #999999;
+  font-size: 4vw;
+  margin-left: 35vw;
+}
+div {
+  text-align: left;
+  margin-left: 10vw;
+  width: 80%;
+}
+hr {
+  border-color: white;
+}
+.blue {
+  color: hsl(200, 100%, 60%);
+}
+#next {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  color: #fefefe;
+  background-color: hsl(135, 100%, 40%);
+  border: none;
+  border-radius: 3px;
+  font-size: 4.5vw;
+  font-weight: 500;
+  outline: none;
+  padding: 7vw;
+  padding-top: 4vw;
+  padding-bottom: 4vw;
+  box-shadow: 1px 2px 1px 0px #cccccc;
+  display: none;
+}
+#next:hover {
+  background-color: hsla(135, 100%, 40%, 0.7);
+  box-shadow: 1px 3px 2px 1px #cccccc;
+}
+#messages {
+  position: fixed;
+  top: -30vw;
+  left: 2.5vw;
+  margin-left: auto;
+  margin-right: auto;
+  height: 29vw;
+  width: 95vw;
+  /*background-color:rgba(240,256,240,0.8);*/
+  background-color: rgba(230, 256, 230, 0.85);
+  border: 0.5px solid gray;
+  border-radius: 10px;
+  text-align: left;
+  transition-duration: 0.3s;
+}
+#messagetext {
+  text-align: left;
+  font-size: 4vw;
+}
+#imessages {
+  display: inline;
+  width: 5vw;
+  margin-left: 2vw;
+}
+#messageheading {
+  font-size: 3.8vw;
+  font-weight: 400;
+  display: inline;
+  position: absolute;
+  color: #777777;
+  margin-left: 3vw;
+  margin-top: 2.5vw;
+}
+#now {
+  display: inline;
+  position: absolute;
+  font-size: 3.7vw;
+  margin-left: 77vw;
+  margin-top: 3vw;
+  color: #777777;
+}
+#messagedivnav {
+  background-color: rgba(100%, 100%, 100%, 0.7);
+  height: 9vw;
+  width: 99.5%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 9px 9px 0px 0px;
+}
+h5 {
+  font-size: 4.1vw;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 2vw;
+  padding-left: 3.5vw;
+}
+#messagetext {
+  font-size: 4.1vw;
+  padding-left: 3.5vw;
+  padding-right: 3.5vw;
+  padding-top: 1vw;
+}

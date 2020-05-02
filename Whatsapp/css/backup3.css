@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: orbitorn;
+}
+
+body {
+    text-align: center;
+}
+
+.backupicon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9vh;
+    width: 15%;
+    margin-top: 25vw;
+}
+
+.round,
+.tick {
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20vw;
+    left: 40vw;
+    top: 95vw;
+}
+
+.backupfound {
+    text-align: center;
+    color: hsl(171, 50%, 50%);
+    font-size: 4.5vw;
+    margin-top: 8vw;
+}
+
+.time {
+    color: #666666;
+    text-align: center;
+    font-size: 4vw;
+    font-weight: 400;
+    line-height: 5vw;
+    margin-top: 3vw;
+}
+
+button {
+    margin-top: 60vw;
+    color: #fefefe;
+    background-color: hsl(135, 100%, 40%);
+    border: none;
+    border-radius: 3px;
+    font-size: 4.5vw;
+    font-weight: 500;
+    outline: none;
+    padding: 7vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    box-shadow: 1px 2px 1px 0px #cccccc;
+}
+
+button:hover {
+    background-color: hsla(135, 100%, 40%, 0.7);
+    box-shadow: 1px 3px 2px 1px #cccccc;
+}
+
+.mrestore {
+    font-size: 4.1vw;
+    font-weight: 400;
+    color: #777777;
+    margin-top: 6vw;
+}

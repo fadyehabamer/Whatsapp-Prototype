@@ -1,0 +1,73 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: orbitorn;
+}
+
+body {
+    text-align: center;
+}
+
+.backupicon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 9vh;
+    width: 15%;
+    margin-top: 25vw;
+}
+
+.backupfound {
+    color: hsl(171, 50%, 50%);
+    font-size: 4.5vw;
+    margin-top: 8vw;
+}
+
+.time {
+    color: #666666;
+    font-size: 4vw;
+    font-weight: 400;
+    line-height: 5vw;
+    margin-top: 3vw;
+}
+
+.noti {
+    font-size: 4vw;
+    font-weight: 400;
+    margin-top: 5vw;
+}
+
+.restore,
+.skip {
+    margin-top: 55vw;
+    bottom: 0;
+    color: #fefefe;
+    background-color: hsl(135, 95%, 40%);
+    border: none;
+    border-radius: 3px;
+    font-size: 4vw;
+    font-weight: 500;
+    outline: none;
+    padding: 7vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    box-shadow: 1px 2px 1px 0px #cccccc;
+    width: 41vw;
+}
+
+.restore:hover {
+    background-color: hsla(135, 100%, 40%, 0.7);
+    box-shadow: 1px 3px 2px 1px #cccccc;
+}
+
+.skip {
+    margin-left: 3vw;
+    border: 1px solid #cccccc;
+    background-color: white;
+    color: hsl(170, 100%, 23%);
+    box-shadow: none;
+}
+
+.skip:hover {
+    background-color: #eeeeee;
+}

@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: orbitorn;
+}
+
+body {
+    text-align: center;
+}
+
+.profileinfo {
+    color: hsl(170, 100%, 27%);
+    text-align: center;
+    margin-top: 6vw;
+    font-size: 5vw;
+}
+
+.noti1 {
+    color: #777777;
+    font-size: 4.1vw;
+    text-align: center;
+    margin-top: 5vw;
+}
+
+div {
+    text-align: left;
+}
+
+img {
+    position: absolute;
+}
+
+.profilepic {
+
+    width: 22vw;
+    margin-left: 5vw;
+    margin-top: 4vw;
+    display: inline-block;
+}
+
+#emoji {
+    width: 8vw;
+    margin-top: 11vw;
+    margin-left: 3vw;
+}
+
+input {
+    margin-top: 10vw;
+    margin-left: 30vw;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+    text-align: left;
+    font-size: 5vw;
+    font-weight: 400;
+    width: 49vw;
+    height: 10vw;
+    display: inline-block;
+    caret-color: hsl(170, 100%, 30%);
+}
+
+#inputno {
+    display: inline-block;
+    color: #888888;
+    font-size: 3.5vw;
+}
+
+#next {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    color: #fefefe;
+    background-color: hsl(135, 100%, 40%);
+    border: none;
+    border-radius: 3px;
+    font-size: 4vw;
+    font-weight: 500;
+    outline: none;
+    padding: 7vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    box-shadow: 1px 2px 1px 0px #cccccc;
+}
+
+#next:hover {
+    background-color: hsla(135, 100%, 40%, 0.7);
+    box-shadow: 1px 3px 2px 1px #cccccc;
+}
+
+.line {
+    height: .6vw;
+    width: 55vw;
+    background-color: hsl(170, 200%, 23%);
+    margin-left: 30vw;
+    margin-top: -1vw;
+}
+
+#emojidiv {
+    width: 100%;
+    background-color: #e8ffe8;
+    height: 0vw;
+    margin-top: 120vw;
+
+}
+
+#emojinoti {
+    text-align: center;
+    font-size: 8vw;
+    font-weight: 400;
+    padding-top: 10vw;
+    display: none;
+}
+
+#bigemoji {
+    width: 20vw;
+    margin-left: 40vw;
+    margin-top: 3vw;
+    display: none;
+}
+
+#emojinoti1 {
+    color: #666666;
+    font-size: 4.3vw;
+    text-align: center;
+    margin-top: 30vw;
+    display: none;
+}
