@@ -1,0 +1,2707 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#075E54">
+  <title>Chats</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: orbitorn;
+    }
+
+    #statusbar {
+      height: 7vw;
+      width: 100%;
+      position: fixed;
+      top: -7vw;
+      background-color: hsl(173, 100%, 16%);
+      color: white;
+    }
+
+    #header {
+      background-color: #075E54;
+      color: white;
+      height: 32.5vw;
+      box-shadow: 3px 3px 3px 0px #cccccc;
+      transition-duration: 0.2s;
+      transition-property: margin-top;
+      position: fixed;
+      top: 0vw;
+      left: 0;
+      width: 100%;
+      /*margin-top:-40vw;*/
+    }
+
+    #searchdiv {
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      background-color: white;
+      height: 55px;
+      width: 100%;
+      box-shadow: 3px 3px 3px 0px #cccccc;
+
+    }
+
+    .dr {
+      font-size: 20px;
+      font-weight: 500;
+      padding-top: 16px;
+      margin-left: 16px;
+      display: inline-block;
+    }
+
+    img {
+      width: 23px;
+      display: inline-block;
+    }
+
+    #search {
+      margin-top: 17px;
+      position: absolute;
+      margin-left: 245px;
+    }
+
+    h2 {
+      display: inline-block;
+      font-size: 12.6px;
+      margin: 0;
+      padding: 0;
+      /*margin-top:32.5px; margin-left:46px;*/
+    }
+
+    .camera,
+    #chats,
+    #calls {
+      padding: 5.5vw 7.5vw 3.9vw 7.5vw;
+      margin-top: 5vw;
+    }
+
+    #chats {
+      margin-left: 5vw;
+      margin-right: 20px;
+    }
+
+    #status {
+      padding: 5.5vw 0vw 3.9vw 7vw;
+    }
+
+    #chats:ststus {
+      background-color: rgba(93%, 93%, 93%, 0.2);
+    }
+
+    #status,
+    #calls {
+      opacity: 0.6;
+    }
+
+    #calls {
+      margin-left: 8vw;
+    }
+
+    .camera {
+      opacity: 0.55;
+      position: absolute;
+      padding: 2vw;
+      margin-top: 5vw;
+      padding-top: 5vw;
+    }
+
+    .camera:hover {
+      background-color: rgba(93%, 93%, 93%, 0.2);
+    }
+
+    #underline {
+      position: absolute;
+      height: 2.4px;
+      width: 95px;
+      background-color: white;
+      margin-left: 38px;
+      transition-duration: 0.15s;
+      transition-property: margin-left;
+    }
+
+    #back {
+      margin-top: 15.5px;
+      margin-left: 12.3px;
+    }
+
+    #searchinput {
+      position: fixed;
+      top: 2vw;
+      outline: none;
+      left: 15vw;
+      border: none;
+      height: 40px;
+      width: 228px;
+      font-size: 15.5px;
+
+    }
+
+    ::placeholder {
+      color: #aaaaaa;
+    }
+
+    #searchmain {
+      height: 63px;
+      font-size: 15.5px;
+      display: none;
+    }
+
+    #result {
+      position: absolute;
+      display: block;
+      font-size: 16px;
+      margin-top: 20vw;
+      margin-left: 15.5px;
+      font-weight: 500;
+      background: transparent;
+    }
+  </style>
+  <script type="text/javascript">
+    var browser = function () {
+      // Return cached result if avalible, else get result then cache it.
+      if (browser.prototype._cachedResult)
+        return browser.prototype._cachedResult;
+
+      // Opera 8.0+
+      var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+
+      // Firefox 1.0+
+      var isFirefox = typeof InstallTrigger !== 'undefined';
+
+      // Safari 3.0+ "[object HTMLElementConstructor]" 
+      var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
+      // Internet Explorer 6-11
+      var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+      // Edge 20+
+      var isEdge = !isIE && !!window.StyleMedia;
+
+      // Chrome 1+
+      var isChrome = !!window.chrome && !!window.chrome.webstore;
+
+      // Blink engine detection
+      var isBlink = (isChrome || isOpera) && !!window.CSS;
+
+      return browser.prototype._cachedResult =
+        isOpera ? 'Opera' :
+          isFirefox ? 'Firefox' :
+            isSafari ? 'Safari' :
+              isChrome ? 'Chrome' :
+                isIE ? 'IE' :
+                  isEdge ? 'Edge' :
+                    isBlink ? 'Blink' :
+                      "Don't know";
+    };
+
+  </script>
+
+  </script>
+</head>
+
+<body onload="statusbar()">
+  <div id="statusbar">
+    <img src="icons/wp_noti.png" id="wp_noti">
+    <p id="dr">Dark Rose</p>
+    <img src="icons/browsers/chrome.png" id="browser">
+    <img id="data" src="icons/data_off.png">
+    <img id="tower" src="icons/tower.png">
+    <p id="batterypers">73%</p>
+    <img src="icons/battery/battery_50.png" id="battery">
+    <p id="time"> 8:53 pm</p>
+  </div>
+  <style type="text/css">
+    #wp_noti,
+    #dr,
+    #browser,
+    #data,
+    #tower,
+    #batterypers,
+    #battery,
+    #time {
+      display: inline-block;
+      position: absolute;
+    }
+
+    #wp_noti {
+      width: 4.5vw;
+      margin: 1vw 0vw 0vw 2vw;
+      position: absolute;
+    }
+
+    #dr {
+      font-size: 4vw;
+      margin: 1vw 0vw 0vw 8vw;
+      position: absolute;
+    }
+
+    #browser {
+      width: 7vw;
+      margin-left: 26vw;
+    }
+
+    #data {
+      width: 6vw;
+      margin: 0.2vw 0vw 0vw 67vw;
+    }
+
+    #tower {
+      width: 5.3vw;
+      margin: 0.6vw 0vw 0vw 73vw;
+    }
+
+    #batterypers {
+      font-size: 4vw;
+      margin: 1vw 0vw 0vw 81vw;
+    }
+
+    #battery {
+      width: 7.5vw;
+      margin: 2vw 0vw 0vw 90vw;
+    }
+
+    #time {
+      font-size: 4.2vw;
+      margin: 1.2vw 0vw 0vw 43vw;
+    }
+  </style>
+
+  <script type="text/javascript">
+    function statusbar() {
+      var a = new Date();
+      var hour = a.getHours();
+      var min = a.getMinutes();
+      var sec = a.getSeconds();
+      hour = fix(hour);
+      min = fix(min);
+      sec = fix(sec);
+      function fix(i) {
+        if (i < 10) {
+          i = "0" + i;
+          return i;
+        }
+        else { return i; }
+      }
+      if (hour > 12) {
+        ap = "PM";
+      } else {
+        ap = "AM"
+      }
+      if (hour > 12) {
+        hour = hour - 12;
+      }
+      if (hour == 0) {
+        hour = 12;
+      }
+      var ap;
+
+      document.getElementById('time').innerHTML = hour + ":" + min + " " + ap;
+
+      navigator.getBattery().then(function (battery) {
+        var batterylevel = battery.level;
+        batterylevel = batterylevel * 100
+        batterylevel = Math.floor(batterylevel);
+        document.getElementById('batterypers').innerHTML = batterylevel + "%";
+      });
+
+
+      var x = navigator.onLine;
+      if (x) {
+        document.getElementById('data').src = "icons/data_on.png";
+      } else {
+        document.getElementById('data').src = "icons/data_off.png";
+      }
+    }
+
+    switch (browser()) {
+      case "Opera": document.getElementById('browser').src = "icons/browsers/opera.png";
+        document.getElementById('searchdiv').style.top = "30vw";
+
+        break;
+      case "Chrome": document.getElementById('browser').src = "icons/browsers/chrome.png";
+        break;
+      case "Safari": document.getElementById('browser').src = "icons/browsers/safari.png";
+        break;
+      case "Firefox": document.getElementById('browser').src = "icons/browsers/firefox.png";
+        break;
+      case "IE": document.getElementById('browser').src = "icons/browsers/ie.png";
+        break;
+      case "Edge": document.getElementById('browser').src = "icons/browsers/edge.png";
+        break;
+    }
+    setInterval(statusbar, 1000);
+
+    navigator.getBattery().then(function (battery) {
+      var batterylevel = battery.level;
+      batterylevel = batterylevel * 100;
+      if (batterylevel <= 100) {
+        document.getElementById('battery').src = "icons/battery/battery_100.png";
+      }
+      if (batterylevel < 90) {
+        document.getElementById('battery').src = "icons/battery/battery_90.png";
+      }
+      if (batterylevel < 80) {
+        document.getElementById('battery').src = "icons/battery/battery_80.png";
+      }
+      if (batterylevel < 70) {
+        document.getElementById('battery').src = "icons/battery/battery70.png";
+      }
+      if (batterylevel < 60) {
+        document.getElementById('battery').src = "icons/battery/battery_60.png";
+      }
+      if (batterylevel < 50) {
+        document.getElementById('battery').src = "icons/battery/battery_50.png";
+      }
+      if (batterylevel < 40) {
+        document.getElementById('battery').src = "icons/battery/battery_40.png";
+      }
+      if (batterylevel < 30) {
+        document.getElementById('battery').src = "icons/battery/battery30.png";
+      }
+      if (batterylevel < 20) {
+        document.getElementById('battery').src = "icons/battery/battery_20.png";
+      }
+      if (batterylevel < 10) {
+        document.getElementById('battery').src = "icons/battery/battery_10.png";
+      }
+      if (batterylevel < 5) {
+        document.getElementById('battery').src = "icons/battery/battery_5.png";
+      }
+    });
+  </script>
+  </script>
+  <div id="searchmain">
+    <div id="searchdiv">
+      <img id="back" src="icons/back_g.png" onclick="closesearch()">
+      <input oninput="inputs()" id="searchinput" autofocus="autofocus" placeholder="Search...">
+      <img id="cross" src="icons/cross.png" onclick="clearsearch()">
+    </div>
+    <h1 id="result">Search doesn't works correctly<br>
+      It is in beta please. send your feedback. </h1>
+  </div>
+  <style type="text/css">
+    #cross {
+      display: none;
+      position: fixed;
+      top: 5vw;
+      outline: none;
+      left: 85vw;
+    }
+  </style>
+  <script type="text/javascript">
+    function clearsearch() {
+      document.getElementById('searchinput').value = "";
+      document.getElementById('searchinput').focus();
+      document.getElementById('cross').style.display = "none";
+      document.getElementById('result').innerHTML = "Search doesn't work correctly.<br>It is in beta please. send your feedback. ";
+    }
+    function inputs() {
+      var i = document.getElementById('searchinput').value;
+      document.getElementById('result').innerHTML =
+        "No result found for \'" + i + "\'";
+      var l = document.getElementById('searchinput').value.length;
+      if (l == 0) {
+        document.getElementById('cross').style.display = "none";
+        document.getElementById('result').innerHTML = "Search doesn't work correctly.<br>It is in beta please. send your feedback. ";
+      } else {
+        document.getElementById('cross').style.display = "inline-block";
+      }
+    }
+  </script>
+
+  <div id="header">
+    <h1 class="dr">WhatsApp</h1>
+
+    <img id="search" src="icons/ic_search.png" onclick="opensearch()">
+    <img id="morechats" onclick="openmorechats()" src="icons/ic_more.png">
+    <img id="morestatus" onclick="openmorestatus()" src="icons/ic_more.png">
+    <img id="morecalls" onclick="openmorecalls()" src="icons/ic_more.png">
+    <br>
+    <style type="text/css">
+      #morechats,
+      #morecalls,
+      #morestatus {
+        position: absolute;
+        margin-left: 276px;
+        margin-top: 17px;
+      }
+
+      #morechats {
+        display: inline-block;
+        margin-left: 280px;
+      }
+
+      #morestatus {
+        display: none;
+      }
+
+      #morecalls {
+        display: none;
+      }
+    </style>
+
+    <a href="#camera.html"><img id="camera" onclick="opencamera()" class="camera" src="icons/ic_camera.png"></a>
+
+    <h2 id="chats" onclick="clickedchats()">CHATS
+      <img src="icons/bar_new_msg.png" id="bar_new_msg">
+      <p id="chatcount">1</p>
+    </h2>
+    <h2 id="status" onclick="clickedstatus()">STATUS</h2>
+    <h2 id="dot">●</h2>
+    <h2 id="calls" onclick="clickedcalls()">CALLS</h2>
+    <div id="underline"></div>
+  </div>
+  <style type="text/css">
+    #dot {
+      margin: 0;
+      display: inline-block;
+      margin-top: 35px;
+      font-size: 6.7px;
+      opacity: 0.6;
+      position: absolute;
+    }
+
+    #bar_new_msg {
+      position: absolute;
+      margin-top: -1.5vw;
+      margin-left: 4vw;
+      width: 5.5vw;
+      text-align: center;
+    }
+
+
+    #chatcount {
+      color: #075E54;
+      position: absolute;
+      margin-top: -4.5vw;
+      margin-left: 16.3vw;
+      width: 4vw;
+      font-size: 3.5vw;
+    }
+  </style>
+
+
+
+
+
+
+  <!--Div More chats-->
+
+  <div onclick="closemorechats()" id="divmorechats">
+    <p> New group</p>
+    <p>New brodcast</p>
+    <p>Whatsapp Web</p>
+    <p>Starred chatmessages</p>
+    <p>Settings</p>
+  </div>
+  <style type="text/css">
+    #divmorechats {
+      position: fixed;
+      display: none;
+      top: 1.5vw;
+      right: 1.5vw;
+      box-shadow: 10px 10px 50px 8px rgba(30, 30, 30, 0.25);
+      color: black;
+      background-color: #fafafa;
+      height: 78vw;
+      width: 60vw;
+      z-index: 200;
+      border: 1px solid black;
+      border-radius: 3px;
+      border: none;
+    }
+
+    #divmorechats p {
+      font-size: 4.7vw;
+      padding: 5vw 5vw;
+    }
+
+    #divmorechats p:hover {
+      background-color: #ddd;
+      border-radius: 2px;
+    }
+  </style>
+
+
+
+
+
+
+
+  <!--Div More ststus-->
+  <div onclick="closemorestatus()" id="divmorestatus">
+    <p> Status privacy</p>
+    <p>Settings</p>
+
+  </div>
+  <style type="text/css">
+    #divmorestatus {
+      position: fixed;
+      display: none;
+      top: 1.5vw;
+      right: 1.5vw;
+      box-shadow: 10px 10px 50px 8px rgba(30, 30, 30, 0.25);
+      color: black;
+      background-color: #eee;
+      height: 30vw;
+      width: 60vw;
+      z-index: 200;
+      border: 1px solid black;
+      border-radius: 3px;
+      border: none;
+    }
+
+    #divmorestatus p {
+      font-size: 4.7vw;
+      padding: 5vw 5vw;
+    }
+
+    #divmorestatus p:hover {
+      background-color: #ddd;
+      border-radius: 2px;
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+  <!--Div More calls-->
+
+  <div onclick="closemorecalls()" id="divmorecalls">
+    <p>Clear call log</p>
+    <p>Settings</p>
+
+  </div>
+
+  <style type="text/css">
+    #divmorecalls {
+      position: fixed;
+      display: none;
+      top: 1.5vw;
+      right: 1.5vw;
+      box-shadow: 10px 10px 50px 8px rgba(30, 30, 30, 0.25);
+      color: black;
+      background-color: #fafafa;
+      height: 30vw;
+      width: 60vw;
+      z-index: 200;
+      border: 1px solid black;
+      border-radius: 3px;
+      border: none;
+    }
+
+    #divmorecalls p {
+      font-size: 4.7vw;
+      padding: 5vw 5vw;
+    }
+
+    #divmorecalls p:hover {
+      background-color: #ddd;
+      border-radius: 2px;
+    }
+  </style>
+
+  <div onclick="closemorechats()" id="closemore1_div_chats">
+  </div>
+  <div onclick="closemorechats()" id="closemore2_div_chats">
+  </div>
+  <style type="text/css">
+    #closemore1_div_chats {
+      position: fixed;
+      height: 200vw;
+      width: 38vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+
+    #closemore2_div_chats {
+      position: fixed;
+      top: 80vw;
+      right: 0;
+      height: 200vw;
+      width: 65vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+  </style>
+  <script type="text/javascript">
+    function openmorechats() {
+      document.getElementById('closemore1_div_chats').style.display = "block";
+    }
+  </script>
+
+
+
+
+
+
+  <div onclick="closemorestatus()" id="closemore1_div_status">
+  </div>
+  <div onclick="closemorestatus()" id="closemore2_div_status">
+  </div>
+  <style type="text/css">
+    #closemore1_div_status {
+      position: fixed;
+      height: 200vw;
+      width: 38vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+
+    #closemore2_div_status {
+      position: fixed;
+      top: 40vw;
+      right: 0;
+      height: 200vw;
+      width: 65vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+  </style>
+
+
+
+
+
+
+
+
+
+  <div onclick="closemorecalls()" id="closemore1_div_calls">
+  </div>
+  <div onclick="closemorecalls()" id="closemore2_div_calls">
+  </div>
+  <style type="text/css">
+    #closemore1_div_calls {
+      position: fixed;
+      height: 200vw;
+      width: 38vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+
+    #closemore2_div_calls {
+      position: fixed;
+      top: 40vw;
+      right: 0;
+      height: 200vw;
+      width: 65vw;
+      background: transparent;
+      display: none;
+      z-index: 200;
+    }
+  </style>
+
+  <script type="text/javascript">
+
+    var chats = document.getElementById('chats').style;
+    var status = document.getElementById('status').style;
+    var calls = document.getElementById('calls').style;
+    var underline = document.getElementById('underline').value;
+
+    function opencamera() {
+      document.getElementById('underline').style.marginLeft = "0vw";
+      document.getElementById('underline').style.width = "12vw";
+      document.getElementById('header').style.marginTop = "-220px";
+      document.getElementById('header').style.transitionDuration = "0.5s";
+      setTimeout(function () {
+        document.getElementById('header').style.marginTop = "0px";
+        document.getElementById('underline').style.width = "93px";
+        document.getElementById('underline').style.marginLeft = "37px";
+        chats.opacity = "1.0";
+      }, 3000);
+      setTimeout(function () {
+        window.open("camera.html", "_self");
+      }, 400);
+
+    }
+
+    function clickedchats() {
+      chats.opacity = "1.0";
+      document.getElementById('underline').style.marginLeft = "37px";
+      document.getElementById('status').style.opacity = "0.5";
+      document.getElementById('calls').style.opacity = "0.5";
+      document.getElementById('underline').style.width = "93px";
+      openchats();
+      function openchats() {
+        document.getElementById('morecalls').style.display = "none";
+        document.getElementById('morestatus').style.display = "none";
+        document.getElementById('morechats').style.display = "inline-block";
+        document.getElementById('chatsdiv').style.left = "0vw";
+        document.getElementById('statusdiv').style.left = "100vw";
+        document.getElementById('callsdiv').style.left = "200vw";
+      }
+
+    }
+
+
+    function clickedstatus() {
+      document.getElementById('underline').style.marginLeft = "132px";
+      document.getElementById('chats').style.opacity = "0.5";
+      document.getElementById('status').style.opacity = "1.0";
+      document.getElementById('calls').style.opacity = "0.5";
+      document.getElementById('underline').style.width = "96px";
+      document.getElementById('morecalls').style.display = "none";
+      document.getElementById('morestatus').style.display = "inline-block";
+      document.getElementById('morechats').style.display = "none";
+      openststus();
+      function openststus() {
+        document.getElementById('chatsdiv').style.left = "-100vw";
+        document.getElementById('statusdiv').style.left = "100vw";
+        document.getElementById('callsdiv').style.left = "100vw";
+      }
+      setTimeout(function () {
+        document.getElementById('status').style.paddingLeft = "29px";
+        document.getElementById('dot').innerHTML = "";
+        document.getElementById('calls').style.paddingLeft = "17.5px";
+      }, 400);
+    }
+
+    function clickedcalls() {
+      document.getElementById('underline').style.marginLeft = "225px";
+      document.getElementById('chats').style.opacity = "0.5";
+      document.getElementById('status').style.opacity = "0.5";
+      document.getElementById('calls').style.opacity = "1.0";
+      document.getElementById('underline').style.width = "92px";
+      document.getElementById('morecalls').style.display = "inline-block";
+      document.getElementById('morestatus').style.display = "none";
+      document.getElementById('morechats').style.display = "none";
+
+      opencalls();
+      function opencalls() {
+        document.getElementById('chatsdiv').style.left = "-200vw";
+        document.getElementById('callsdiv').style.left = "-100vw";
+        document.getElementById('callsdiv').style.left = "0vw";
+
+      }
+    }
+
+    function opensearch() {
+      document.getElementById('header').style.transitionDuration = "0.2s";
+      document.getElementById('header').style.marginTop = "-25vw";
+      document.getElementById('statusbar').style.top = "-7vw";
+
+
+      setTimeout(function () {
+        document.getElementById('searchmain').style.display = "block";
+        document.getElementById('searchinput').focus();
+      }, 50);
+    }
+    function closesearch() {
+      document.getElementById('statusbar').style.top = "0vw";
+      document.getElementById('header').style.marginTop = "0px";
+      document.getElementById('searchmain').style.display = "none";
+      document.getElementById('searchinput').value = "";
+      document.getElementById('result').innerHTML = "Search doesn't work correctly.<br>It is in beta please. send your feedback. ";
+      if (i == 1) {
+        document.getElementById('header').style.marginTop = "0vw";
+        document.getElementById('statusbar').style.marginTop = "-7vw";
+      }
+      if (i == -1) {
+        document.getElementById('statusbar').style.marginTop = "0vw";
+      }
+
+    }
+    function openmorechats() {
+      document.getElementById('closemore1_div_chats').style.display = "block";
+      document.getElementById('closemore2_div_chats').style.display = "block";
+      document.getElementById('divmorechats').style.display = "block";
+      document.getElementById('closemore1').style.display = "block";
+      document.getElementById('closemore2').style.display = "block";
+    }
+
+
+    function openmorestatus() {
+      document.getElementById('closemore1_div_status').style.display = "block";
+      document.getElementById('closemore2_div_status').style.display = "block";
+      document.getElementById('divmorestatus').style.display = "block";
+      document.getElementById('closemore1').style.display = "block";
+      document.getElementById('closemore2').style.display = "block";
+    }
+
+
+
+    function openmorecalls() {
+      document.getElementById('closemore1_div_calls').style.display = "block";
+      document.getElementById('closemore2_div_calls').style.display = "block";
+      document.getElementById('divmorecalls').style.display = "block";
+      document.getElementById('closemore1').style.display = "block";
+      document.getElementById('closemore2').style.display = "block";
+    }
+
+
+    function closemorechats() {
+      document.getElementById('closemore1_div_chats').style.display = "none";
+      document.getElementById('closemore2_div_chats').style.display = "none";
+      document.getElementById('divmorechats').style.display = "none";
+    }
+
+    function closemorecalls() {
+      document.getElementById('closemore1_div_calls').style.display = "none";
+      document.getElementById('closemore2_div_calls').style.display = "none";
+      document.getElementById('divmorecalls').style.display = "none";
+    }
+    function closemorestatus() {
+      document.getElementById('closemore1_div_status').style.display = "none";
+      document.getElementById('closemore2_div_status').style.display = "none";
+      document.getElementById('divmorestatus').style.display = "none";
+    }
+
+
+
+  </script>
+
+
+
+
+  <!--Fullscreen-->
+
+  <div id="fullnotification">
+    <div id="notification">
+      <h1 id="enabled">About fullscreen mode</h1>
+      <h4 id="enabled2">Pleaee Read carefully :</h4>
+      <p id="mininoti">• It will hide your status bar.</p>
+      <p id="mininoti">• When fullscreen is enabled press back to exit
+        FullScreen.</p>
+      <p id="mininoti">• FullScreen mode is very good to access
+        camera. I recommend to use FullScreen</p>
+      <p id="mininoti" onclick="ok()" style="color:blue">
+
+        Click here to open fullscreen directly.</p>
+    </div>
+    <button onclick="no()" id="no">Ok, I understood</button>
+  </div>
+  <style type="text/css">
+    #fullnotification {
+      position: fixed;
+      z-index: 9999;
+      bottom: -85vw;
+      height: 0vw;
+      width: 100vw;
+      transition-duration: 0.2s;
+      transition-property: bottom;
+      transition-timing-function: ease-in-out;
+    }
+
+    #notification {
+      background-color: rgba(90%, 90%, 100%, 0.95);
+      height: 65vw;
+      width: 95vw;
+      margin-left: 2.5vw;
+      border-radius: 10px;
+    }
+
+    #enabled {
+      position: relative;
+      padding-top: 5vw;
+      margin-left: 5vw;
+      margin-bottom: 2vw;
+    }
+
+    #enabled2 {
+      margin-left: 5vw;
+      padding-bottom: 2vw;
+    }
+
+    #mininoti {
+      color: #333;
+      margin-left: 6.5vw;
+      margin-right: 8vw;
+      font-size: 4vw;
+      white-space: pre;
+    }
+
+    #no {
+      height: 15vw;
+      width: 95vw;
+      margin-left: 2.5vw;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      color: dodgerblue;
+      font-size: 5.7vw;
+      font-weight: 500;
+      bottom: 2.5vw;
+      position: absolute;
+      background-color: rgba(90%, 90%, 100%, 0.95);
+    }
+
+    #no {
+      height: 15vw;
+      width: 95vw;
+      margin-left: 2.5vw;
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      color: white;
+      background: dodgerblue;
+      font-size: 5.7vw;
+      font-weight: 500;
+      bottom: 2.5vw;
+      position: absolute;
+    }
+
+    #no:hover {
+      background-color: rgba(30, 144, 255, 0.6);
+    }
+
+    #ok:hover {
+      background-color: rgba(93%, 93%, 93%, 0.6);
+    }
+
+    #enabled {
+      font-size: 7vw;
+    }
+  </style>
+  <script type="text/javascript">
+    var elem = document.documentElement;
+    function ok() {
+      document.getElementById('full').src = "icons/fullscreen_on.png";
+      document.getElementById('fullnotification').style.transitionDuration = "0.3s"
+      document.getElementById('fullnotification').style.bottom = "-85vw";
+      document.getElementById('full').src = "icons/fullscreen_on.png";
+      document.getElementById('statusbar').style.top = "0vw";
+      document.getElementById('header').style.top = "7vw";
+      document.getElementById('divmorestatus').style.top = "8.5vw";
+      document.getElementById('divmorechats').style.top = "8.5vw";
+      document.getElementById('divmorecalls').style.top = "8.5vw";
+      //document.getElementById('fullnotification').style.height="0vw";
+      /* View in Fullscreen */
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+
+    function gotit() {
+      i = i * (-1);
+      document.getElementById('full').src = "icons/fullscreen_on.png";
+      document.getElementById('fullnotification').style.transitionDuration = "0.3s"
+      document.getElementById('fullnotification').style.bottom = "-85vw";
+
+      //document.getElementById('fullnotification').style.height="0vw";
+      /* View in Fullscreen */
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    }
+    function no() {
+
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.mozCancelFullScreen) {
+        document.mozCancelFullScreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
+    }
+
+
+    setTimeout(function () {
+      document.getElementById('fullnotification').style.bottom = "0";
+      document.getElementById('fullnotification').style.height = "85vw";
+    }, 1000);
+
+    function no() {
+      document.getElementById('fullnotification').style.transitionDuration = "0.3s"
+      document.getElementById('fullnotification').style.bottom = "-85vw";
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--chats div-->
+  <div id="chatsdiv">
+
+
+
+    <div id="chat1" onclick="none()">
+      <img id="profilepic" src="icons/profile_pic1.png">
+      <h1 id="chat_contact_name">Dark Rose</h1>
+      <p id="msg_time">10:22 PM</p>
+      <p id="msg_show_new">Hello</p>
+      <img id="msg_count_green" src="icons/msg_count_green.png">
+      <p id="msg_counter">1</p>
+      <hr>
+    </div>
+    <script type="text/javascript">
+      function none() {
+        document.getElementById('msg_count_green').style.display = "none";
+        document.getElementById('msg_time').style.display = "none";
+        window.open("darkrose.html", "_self");
+
+      }
+    </script>
+    <div id="chat1">
+      <img id="profilepic" src="icons/profile_pic2.png">
+      <h1 id="chat_contact_name">Abinash Karmakar</h1>
+      <img id="tick" class="black" src="icons/tick_dbl_black.png">
+      <p id="msg_show">Ok</p>
+      <hr>
+    </div>
+
+    <div id="chat1">
+      <img id="profilepic" src="icons/profile_pic3.png">
+      <h1 id="chat_contact_name">Friend</h1>
+      <p id="msg_time_read"> 19/4/20</p>
+      <img id="tick" src="icons/tick_dbl_blue.png">
+      <p id="msg_show">Goodnight</p>
+
+    </div>
+    <p id="tap_hold_chat">Tap and hold on a chat for more options</p>
+
+
+
+
+
+
+    <img src="icons/green_circle.png" id="green_circle" onclick="opencontacts()">
+    <img src="icons/message_new.png" id="message_new" onclick="opencontacts()">
+    <style type="text/css">
+      #green_circle,
+      #message_new {
+        position: absolute;
+        top: 115vw;
+        left: 78vw;
+        width: 18vw;
+      }
+
+      #green_circle {
+        box-shadow: 5px 5px 15px 5px rgba(100, 100, 100, 0.2);
+        border-radius: 50%;
+      }
+
+      #green_circle:hover {
+        opacity: 0.7;
+      }
+
+      #message_new {
+        width: 8vw;
+        margin: 5vw;
+      }
+
+
+
+
+
+
+      #profilepic,
+      #chat_contact_name,
+      #msg_time,
+      #msg_show,
+      #msg_count_green,
+      #msg_counter,
+      #msg_show_new,
+      #msg_time_read {
+        display: inline-block;
+      }
+
+      #profilepic {
+        width: 17vw;
+        margin: 3vw 0vw 0vw 4vw;
+      }
+
+      #chat_contact_name {
+        position: absolute;
+        font-size: 4.7vw;
+        font-weight: 500;
+        margin: 5vw 0vw 0vw 4vw;
+      }
+
+      #msg_time,
+      #msg_time_read {
+        position: absolute;
+        letter-spacing: -0.5px;
+        color: #25D366;
+        font-size: 3.4vw;
+        margin: 5.5vw 0vw 0vw 60vw;
+        white-space: pre;
+      }
+
+      #msg_time_read {
+        color: gray;
+      }
+
+      #tick {
+        position: absolute;
+        width: 4.9vw;
+        margin: 12.8vw 0vw 0vw 4vw;
+      }
+
+      .black {
+        opacity: 0.5;
+      }
+
+      #msg_show_new {
+        position: absolute;
+        font-size: 4.3vw;
+        color: #777;
+        margin: 12vw 0vw 0vw 4vw;
+        font-weight: 400;
+      }
+
+      #msg_show {
+        position: absolute;
+        font-size: 4.3vw;
+        color: #777;
+        margin: 12vw 0vw 0vw 9.5vw;
+        font-weight: 400;
+      }
+
+      #msg_count_green {
+        position: absolute;
+        width: 7vw;
+        margin: 11vw 0vw 0vw 64.5vw;
+      }
+
+      #msg_counter {
+        position: absolute;
+        width: 6.5vw;
+        margin: 12.4vw 0vw 0vw 67vw;
+        color: white;
+        font-size: 3.5vw;
+        font-weight: 500;
+      }
+
+      #tap_hold_chat {
+        font-size: 3.4vw;
+        color: gray;
+        font-weight: 600;
+        text-align: center;
+        margin-top: 10vw;
+      }
+
+      #chatsdiv {
+
+        position: fixed;
+        background: white;
+        transition-duration: 0.1s;
+        width: 100vw;
+        height: 100%;
+        margin-top: 41.5vw;
+        left: 0vw;
+      }
+
+      #chat1 {
+        position: relative;
+        background: white;
+        height: 23.55vw;
+        width: 100%;
+      }
+
+      hr {
+        margin-top: 2vw;
+        width: 71%;
+        margin-left: 24%;
+        border-color: #fff;
+        height: 0.1%;
+        opacity: 0.4;
+      }
+    </style>
+
+
+
+
+
+
+
+
+
+
+    <!--statusdiv-->
+    <div id="statusdiv">
+
+
+
+      <div id="status1" onclick="clicked_status1()">
+        <img id="statusprofilepic" src="icons/statuspp/profile_pic1.png">
+        <h1 id="chat_contact_name">My status</h1>
+        <p id="msg_show_new">1 minute ago</p>
+        <img id="dot3_my_status" src="icons/3dot_my_status.png">
+      </div>
+      <p id="recent_updates">Recent updates</p>
+      <style type="text/css">
+        #recent_updates,
+        #viewed_updates {
+          background-color: rgb(240, 240, 240);
+          padding: 2vw 0vw 2vw 4vw;
+          color: #555;
+          font-size: 4vw;
+          font-weight: 500;
+        }
+      </style>
+      <div id="status1" onclick="clicked_status2()">
+        <img id="statusprofilepic2" src="icons/statuspp/profile_pic2.png">
+        <h1 id="chat_contact_name">Dark Rose</h1>
+        <p id="msg_show_new">1 minute ago</p>
+        <hr>
+      </div>
+      <p id="viewed_updates">Viewed updates</p>
+
+      <div id="status1" onclick="clicked_status3()">
+        <img id="statusprofilepic" src="icons/statuspp/profile_pic3.png">
+        <h1 id="chat_contact_name">Abinash</h1>
+        <p id="msg_show_new">Yesterday, 12:20 PM</p>
+      </div>
+
+      <div id="status1" onclick="">
+        <img id="statusprofilepic" src="icons/statuspp/profile_pic4.png">
+        <h1 id="chat_contact_name">Friend</h1>
+        <p id="msg_show_new">Yesterday, 12:45 PM</p>
+      </div>
+
+
+
+
+
+      <img src="icons/green_circle.png" id="green_circle" onclick="opencamera()">
+      <img src="icons/ic_camera.png" id="message_new" onclick="opencamera()">
+
+
+
+      <img src="icons/white_circle.png" id="white_circle">
+      <img src="icons/write_status.png" id="write_status">
+      <style type="text/css">
+        #white_circle,
+        #write_status {
+          position: absolute;
+          top: 96vw;
+          left: 80.5vw;
+          width: 13.5vw;
+        }
+
+        #white_circle {
+          box-shadow: 5px 5px 15px 5px rgba(100, 100, 100, 0.2);
+          border-radius: 50%;
+        }
+
+        #white_circle :hover {
+          opacity: 0.7;
+        }
+
+        #write_status {
+          width: 6vw;
+          margin: 4vw;
+        }
+
+
+
+
+
+
+        #statusprofilepic,
+        #statusprofilepic2,
+        #chat_contact_name,
+        #msg_time,
+        #msg_show,
+        #msg_count_green,
+        #msg_counter,
+        #msg_show_new,
+        #msg_time_read,
+        #dot3_my_status {
+          display: inline-block;
+        }
+
+        #statusprofilepic,
+        #statusprofilepic2 {
+          width: 19vw;
+          margin: 3vw 0vw 0vw 4vw;
+        }
+
+        #chat_contact_name {
+          position: absolute;
+          font-size: 4.7vw;
+          font-weight: 500;
+          margin: 5vw 0vw 0vw 4vw;
+        }
+
+        #msg_time,
+        #msg_time_read {
+          position: absolute;
+          letter-spacing: -0.5px;
+          color: #25D366;
+          font-size: 3.4vw;
+          margin: 5.5vw 0vw 0vw 60vw;
+          white-space: pre;
+        }
+
+        #msg_time_read {
+          color: gray;
+        }
+
+        #tick {
+          position: absolute;
+          width: 4.9vw;
+          margin: 12.8vw 0vw 0vw 4vw;
+        }
+
+        .black {
+          opacity: 0.5;
+        }
+
+        #msg_show_new {
+          position: absolute;
+          font-size: 4.3vw;
+          color: #777;
+          margin: 12vw 0vw 0vw 4vw;
+          font-weight: 400;
+        }
+
+        #msg_show {
+          position: absolute;
+          font-size: 4.3vw;
+          color: #777;
+          margin: 12vw 0vw 0vw 9.5vw;
+          font-weight: 400;
+        }
+
+        #msg_count_green {
+          position: absolute;
+          width: 7vw;
+          margin: 11vw 0vw 0vw 64.5vw;
+        }
+
+        #dot3_my_status {
+          position: absolute;
+          width: 7vw;
+          margin: 6vw 0vw 0vw 62vw;
+          padding: 2vw;
+          border-radius: 50%;
+        }
+
+        #dot3_my_status:hover {
+          background: rgba(0, 0, 0, 0.1);
+
+        }
+
+        #msg_counter {
+          position: absolute;
+          width: 6.5vw;
+          margin: 12.4vw 0vw 0vw 67vw;
+          color: white;
+          font-size: 3.5vw;
+          font-weight: 500;
+        }
+
+        #tap_hold_chat {
+          font-size: 3.4vw;
+          color: gray;
+          font-weight: 600;
+          text-align: center;
+          margin-top: 10vw;
+        }
+
+        #status1 {
+          position: relative;
+          background: white;
+          height: 23.55vw;
+          width: 100%;
+        }
+
+        hr {
+          margin-top: 2vw;
+          width: 71%;
+          margin-left: 24%;
+          border-color: #fff;
+          height: 0.1%;
+          opacity: 0.4;
+        }
+
+        #statusdiv {
+          transition-duration: 0.1s;
+          position: fixed;
+          background: white;
+          width: 100vw;
+          height: 100%;
+          top: 0vw;
+          left: 100vw;
+        }
+      </style>
+
+      <div id="statusdiv">
+        <style type="text/css">
+          #statusdiv {
+            position: absolute;
+            top: 0;
+
+          }
+        </style>
+
+
+
+
+        <!--calls div-->
+
+        <div id="callsdiv">
+          <div id="chat1">
+            <img id="profilepic" src="icons/profile_pic1.png">
+            <h1 id="chat_contact_name">Dark Rose</h1>
+            <img id="call_out" src="icons/call_out.png">
+            <p id="msg_show">Yesterday, 12:20 PM</p>
+            <img id="videocall" src="icons/video_call.png">
+          </div>
+          <div id="chat1">
+            <img id="profilepic" src="icons/profile_pic2.png">
+            <h1 id="chat_contact_name">Abinash(devoloper)</h1>
+            <img id="call_out" src="icons/call_in.png">
+            <p id="msg_show">Yesterday, 12:20 PM</p>
+            <img id="videocall" src="icons/call.png">
+          </div>
+
+          <div id="chat1">
+            <img id="profilepic" src="icons/profile_pic3.png">
+            <h1 id="chat_contact_name">Friend</h1>
+            <img id="call_out" src="icons/call_out.png">
+            <p id="msg_show">Yesterday, 12:45 PM</p>
+            <img id="videocall" src="icons/call.png">
+          </div>
+        </div>
+
+        <img src="icons/green_circle.png" id="green_circle" onclick="open_div_new_calls()">
+        <img src="icons/call_+.png" id="message_new" onclick="open_div_new_calls()">
+      </div>
+      <style type="text/css">
+        #profilepic,
+        #chat_contact_name,
+        #msg_time,
+        #msg_show,
+        #msg_count_green,
+        #msg_counter,
+        #msg_show_new,
+        #msg_time_read,
+        #call_out {
+          display: inline-block;
+        }
+
+        #profilepic {
+          width: 17vw;
+          margin: 3vw 0vw 0vw 4vw;
+        }
+
+        #chat_contact_name {
+          position: absolute;
+          font-size: 4.7vw;
+          font-weight: 500;
+          margin: 5vw 0vw 0vw 4vw;
+        }
+
+        #msg_time,
+        #msg_time_read {
+          position: absolute;
+          letter-spacing: -0.5px;
+          color: #25D366;
+          font-size: 3.4vw;
+          margin: 5.5vw 0vw 0vw 60vw;
+          white-space: pre;
+        }
+
+        #msg_time_read {
+          color: gray;
+        }
+
+        #call_out {
+          position: absolute;
+          width: 3.2vw;
+          margin: 12.7vw 0vw 0vw 4vw;
+        }
+
+        .black {
+          opacity: 0.5;
+        }
+
+        #msg_show_new {
+          position: absolute;
+          font-size: 4.3vw;
+          color: #777;
+          margin: 12vw 0vw 0vw 4vw;
+          font-weight: 400;
+        }
+
+        #msg_show {
+          position: absolute;
+          font-size: 4.3vw;
+          color: #777;
+          margin: 12vw 0vw 0vw 9.5vw;
+          font-weight: 400;
+        }
+
+        #videocall {
+          position: absolute;
+          width: 8vw;
+          margin: 6vw 0vw 0vw 64.5vw;
+        }
+
+        #msg_counter {
+          position: absolute;
+          width: 6.5vw;
+          margin: 12.4vw 0vw 0vw 67vw;
+          color: white;
+          font-size: 3.5vw;
+          font-weight: 500;
+        }
+
+        #tap_hold_chat {
+          font-size: 3.4vw;
+          color: gray;
+          font-weight: 600;
+          text-align: center;
+          margin-top: 10vw;
+        }
+
+        #chat1 {
+          position: relative;
+          background: white;
+          height: 23.55vw;
+          width: 100%;
+        }
+
+        hr {
+          margin-top: 2vw;
+          width: 71%;
+          margin-left: 24%;
+          border-color: #fff;
+          height: 0.1%;
+          opacity: 0.4;
+        }
+
+        #callsdiv {
+          transition-duration: 0.1s;
+          position: fixed;
+          background: white;
+          width: 100vw;
+          height: 100%;
+          top: 41.5vw;
+          left: 200vw;
+        }
+      </style>
+      <script type="text/javascript">
+        function openchats() {
+          document.getElementById('chatsdiv').style.marginLeft = "0vw";
+        }
+
+        function opencalls() {
+          document.getElementById('callsdiv').style.left = "0vw";
+        }
+        function openststus() {
+          document.getElementById('chatsdiv').style.left = "0vw";
+        }
+      </script>
+
+      <img src="icons/fullscreen_off.png" id="full" onclick="controlfullscreen()">
+      <audio id="fullscreen_audio" type="audio/mpeg">
+        <source src="sound/fullscreen.mp3">
+      </audio>
+      <style type="text/css">
+        #full {
+          position: fixed;
+          padding: 5vw;
+          width: 8vw;
+          bottom: -2vw;
+          left: -2vw;
+          border-radius: 50%;
+        }
+
+        #full:hover {
+          background-color: rgba(20%, 0%, 0%, 0.1);
+        }
+      </style>
+
+      <script type="text/javascript">
+        var i = 1;
+        function controlfullscreen() {
+          document.getElementById('fullscreen_audio').play();
+          document.getElementById('statusbar').style.transitionDuration = "0.1s";
+          document.getElementById('header').style.transitionDuration = "0.1s";
+          i = i * (-1);
+          if (i == -1) {
+            ok();
+            document.getElementById('statusbar').style.marginTop = "0vw";
+          }
+
+          if (i == 1) {
+            alert("full screen exits");
+            document.getElementById('full').src = "icons/fullscreen_off.png";
+            document.getElementById('statusbar').style.top = "-7vw";
+            document.getElementById('header').style.top = "0vw";
+            document.getElementById('divmorechats').style.top = "1.5vw";
+            document.getElementById('divmorecalls').style.top = "1.5vw";
+            document.getElementById('divmorestatus').style.top = "1.5vw";
+          }
+        }
+      </script>
+
+
+
+
+
+      <div id="cameradiv">
+        <div id="container">
+          <video autoplay="true" id="videoElement">
+          </video>
+        </div>
+        <script type="text/javascript">
+          var video = document.querySelector("#videoElement");
+
+          if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+              .then(function (stream) {
+                video.srcObject = stream;
+              })
+              .catch(function (err0r) {
+                console.log("Something went wrong!");
+              });
+          }
+        </script>
+        <style type="text/css">
+          #container {
+            transition-duration: 0.3s;
+          }
+        </style>
+        <img id="crosscamera" src="icons/cross_white.png" onclick="closecamera()">
+        <div id="images">
+          <img id="arrow_up" src="icons/arrow_up.png">
+          <div id="imgshort">
+            <img id="img1" src="icons/photos/img1.png">
+            <img id="img2" src="icons/photos/img2.png">
+            <img id="img3" src="icons/photos/img3.png">
+            <img id="img4" src="icons/photos/img4.png">
+            <img id="img5" src="icons/photos/img5.png">
+          </div>
+
+          <div id="flashcam">
+            <img id="flash" onclick="fl()" src="icons/flash_off.png">
+            <script type="text/javascript">
+              var f = 0;
+              var scale = 1;
+              function fl() {
+                f = f + 1; scale = scale * (-1);
+                var v = f % 3;
+                document.getElementById('flash').style.transform = "scaleX(" + scale + ")";
+                if (v == 0) {
+                  document.getElementById('flash').src = "icons/flash_off.png";
+                }
+                if (v == 1) {
+                  document.getElementById('flash').src = "icons/flash_on.png";
+                }
+                if (v == 2) {
+                  document.getElementById('flash').src = "icons/flash_auto.png";
+                }
+              }
+              var z = 1;
+              function changecamera() {
+                z = z * (-1)
+                if (z == 1) {
+                  document.getElementById('camerao').style.transform = "scaleX(-1)";
+                  document.getElementById('container').style.transform = "scaleX(-1) scaleY(1)";
+                } else {
+                  document.getElementById('camerao').style.transform = "scaleX(1)";
+                  document.getElementById('container').style.transform = "scaleX(1) scaleY(1)";
+
+                }
+              }
+            </script>
+            <img onclick="changecamera()" id="camerao" src="icons/camera_flip.png">
+            <div id="round">
+              <img id="c1" onclick="capture()" src="icons/ring_no.png">
+            </div>
+          </div>
+          <div id="whiteborder">
+          </div>
+          <p id="holdfor"> Tap for photo, video is not available</p>
+
+
+        </div>
+        <style type="text/css">
+          #cameradiv {
+            position: fixed;
+            transition-duration: 0.1s;
+            top: 0;
+            left: -150%;
+            background: black;
+            height: 100%;
+            width: 100%;
+          }
+
+          #images {
+            position: absolute;
+            top: 0;
+          }
+
+          #arrow_up {
+            position: fixed;
+            width: 4vw;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 106vw;
+            margin-left: 43vw;
+            padding: 5.7vw 5vw 5.7vw 5vw;
+            border-radius: 50%;
+          }
+
+          #arrow_up:hover {
+            background: rgb(255, 255, 255, 0.3);
+          }
+
+          #imgshort img {
+            position: fixed;
+            width: 21.5vw;
+            margin-top: 120vw;
+          }
+
+          #img1 {
+            margin-left: 2vw;
+          }
+
+          #img2 {
+            margin-left: 25.5vw;
+          }
+
+          #img3 {
+            margin-left: 49vw;
+          }
+
+          #img4 {
+            margin-left: 72.5vw;
+          }
+
+          #img5 {
+            margin-left: 96vw;
+          }
+
+          #flash,
+          #camerao {
+            position: absolute;
+            margin-top: 155vw;
+            display: inline-block;
+            width: 11vw;
+          }
+
+          #crosscamera {
+            position: absolute;
+            top: 2vw;
+            right: 2vw;
+            width: 7vw;
+            padding: 2vw;
+            border-radius: 50%;
+            box-shadow: 3px 3px 30px 3px #fff;
+            border: 1px solid white;
+            transition-duration: 0.05s;
+          }
+
+          #crosscamera:hover {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 4vw;
+          }
+
+          #flash {
+            margin-left: 15vw;
+            transition-duration: 0.2s;
+            transition-property: transform;
+          }
+
+          #camerao {
+            margin-left: 75vw;
+            transition-duration: 0.5s;
+            transition-property: transform;
+
+          }
+
+          #camerao :hover {
+            transform: scaleX(-1);
+          }
+
+          #c1 {
+            position: absolute;
+            margin-top: 8vw;
+            width: 20vw;
+            margin-left: 39.5vw;
+            border-radius: 50%;
+            border: 2.5px solid white;
+            transition-duration: 0.1s;
+            transition-property: transform;
+          }
+
+          #round {
+            position: absolute;
+            margin-top: 140vw;
+          }
+
+          #whiteborder {
+            position: fixed;
+            height: 96vh;
+            width: 94vw;
+            background: transparent;
+            border: 0vw solid white;
+            z-index: 99990;
+            transition-duration: 5s;
+            display: none;
+            border-width: 0vw;
+          }
+
+          #c1:hover {
+            background-color: red;
+            transform: scaleX(1.2) scaleY(1.2);
+          }
+
+          #holdfor {
+            position: fixed;
+            text-align: center;
+            font-size: 4vw;
+            width: 70vw;
+            left: 15vw;
+            bottom: 1vw;
+            color: white;
+          }
+        </style>
+        <script type="text/javascript">
+          function opencamera() {
+            document.getElementById('cameradiv').style.left = "0%";
+          }
+          function closecamera() {
+            document.getElementById('cameradiv').style.left = "-150%";
+          }
+          function capture() {
+            document.getElementById('whiteborder').style.display = "block";
+            document.getElementById('whiteborder').style.borderWidth = "3vw";
+            document.getElementById('c1').style.backgroundColor = "red";
+            document.getElementById('c1').style.transform = "scaleX(1.2) scaleY(1.2)";
+            document.getElementById('holdfor').style.display = "none";
+            document.getElementById('crosscamera').style.display = "none";
+
+
+            setTimeout(function () {
+              document.getElementById('whiteborder').style.display = "none";
+              document.getElementById('c1').style.backgroundColor = "transparent";
+              document.getElementById('c1').style.transform = "scaleX(1) scaleY(1)";
+            }, 200);
+            setTimeout(function () {
+              document.getElementById('holdfor').style.display = "block";
+              document.getElementById('crosscamera').style.display = "block";
+
+            }, 400);
+          }
+
+        </script>
+
+
+
+
+        <!--div contacts-->
+
+        <div id="contacts">
+          <div id="contact_header">
+            <img id="contacts_back" src="icons/back.png" onclick="closecontacts()">
+            <h1 id="select_contact">Select contact</h1>
+            <p id="number_of_contacts">3 contacts</p>
+            <img id="contacts_search" src="icons/ic_search.png" onclick="opensearch()">
+            <img id="contacts_more" src="icons/ic_more.png" onclick="openmorecontacts()">
+          </div>
+          <div id="contacts_2nd">
+            <img id="new_group_photo" src="icons/new_group.png">
+            <h1 id="new_group">New group</h1>
+            <br>
+            <img id="new_contact_photo" src="icons/new_contact.png">
+            <h1 id="new_contact">New contact</h1>
+            <br>
+            <img src="icons/profile_pic2.png" id="contact_profule_pic">
+            <h1 id="contact_name">Abinash</h1>
+            <p id="contact_about">About</p>
+            <br>
+            <img src="icons/profile_pic1.png" id="contact_profule_pic">
+            <h1 id="contact_name">Dark Rose</h1>
+            <p id="contact_about">About</p>
+            <br>
+            <img src="icons/profile_pic3.png" id="contact_profule_pic">
+            <h1 id="contact_name">Friend</h1>
+            <p id="contact_about">About</p>
+            <br>
+            <img id="contact_share" src="icons/share_black.png">
+            <h1 id="new_group">Invite friends</h1>
+            <br>
+            <img id="contact_share" src="icons/help_black.png">
+            <h1 id="new_group">Contacts help</h1>
+            <br>
+          </div>
+
+          <div onclick="closemorecontacts()" id="divmorecontacts">
+            <p>Invite a friend</p>
+            <p>Contact</p>
+            <p>Refresh</p>
+            <p>Help</p>
+          </div>
+          <div onclick="closemorecontacts()" id="closemore1_div_contacts">
+          </div>
+          <div onclick="closemorecontacts()" id="closemore2_div_contacts">
+
+            <style type="text/css">
+              * {
+                margin: 0;
+                padding: 0;
+                font-family: orbitorn;
+              }
+
+              #contacts {
+                position: fixed;
+                top: 0;
+                left: 110vw;
+                height: 100%;
+                width: 100%;
+                background-color: white;
+                transition-duration: 0.05s;
+                transition-property: left;
+              }
+
+              #contact_header {
+                background-color: #075E54;
+                color: white;
+                height: 18vw;
+                width: 100%;
+                box-shadow: 3px 3px 3px 0px #cccccc;
+              }
+
+              #contacts_back,
+              #select_contacts,
+              #contacts_search,
+              #contacts_more,
+              #number_of_contacts {
+                display: inline-block;
+                width: 10vw;
+              }
+
+              #contacts_search,
+              #contacts_back,
+              #contacts_more {
+                width: 8vw;
+                padding: 3vw;
+                border-radius: 50%;
+              }
+
+              #contacts_more:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+              }
+
+              #contacts_back:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+              }
+
+              #contacts_search:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+              }
+
+              #contacts_back {
+                position: absolute;
+                margin: 2vw 0vw 0vw 2vw;
+              }
+
+              #select_contact {
+                position: absolute;
+                font-weight: 500;
+                font-size: 6.6vw;
+                white-space: nowrap;
+                margin: 3vw 0vw 0vw 22vw;
+              }
+
+              #number_of_contacts {
+                position: absolute;
+                white-space: nowrap;
+                margin: 11vw 0vw 0vw 22vw;
+                font-size: 4.3vw;
+              }
+
+              #contacts_search {
+                margin: 2vw 0vw 0vw 70vw;
+              }
+
+              #contacts_2nd {
+                position: absolute;
+                top: 20vw;
+              }
+
+              #new_group,
+              #call_call,
+              #call_videocall,
+              #contact_share,
+              #new_group_photo,
+              #new_contact,
+              #new_contact_photo {
+                display: inline-block;
+                width: 14vw;
+                border-radius: 50%;
+                font-size: 4.8vw;
+                white-space: nowrap;
+                font-weight: 600;
+                margin-left: 5vw;
+                margin-top: 5vw;
+              }
+
+              #new_contact,
+              #new_group {
+                position: absolute;
+                margin-top: 9vw;
+              }
+
+              #contact_name,
+              #contact_name,
+              #contact_about {
+                display: inline-block;
+              }
+
+              #contact_profule_pic {
+                width: 14vw;
+                margin: 5vw 0vw 0vw 5vw;
+              }
+
+              #contact_name {
+                font-size: 4.8vw;
+                font-weight: 600;
+                position: absolute;
+                margin: 7vw 0vw 0vw 5vw;
+                white-space: nowrap;
+              }
+
+              #contact_about {
+                position: absolute;
+                font-size: 4.3vw;
+                margin: 12.5vw 0vw 0vw 5vw;
+                color: gray;
+              }
+
+              #contact_share {
+                width: 8vw;
+                margin-left: 8vw;
+                margin-top: 7vw;
+              }
+
+              #divmorecontacts {
+                position: fixed;
+                display: none;
+                top: 1.5vw;
+                right: 1.5vw;
+                box-shadow: 10px 10px 50px 8px rgba(30, 30, 30, 0.25);
+                color: black;
+                background-color: #fafafa;
+                height: 62vw;
+                width: 60vw;
+                z-index: 200;
+                border: 1px solid black;
+                border-radius: 3px;
+                border: none;
+              }
+
+              #divmorecontacts p {
+                font-size: 4.7vw;
+                padding: 5vw 5vw;
+              }
+
+              #divmorecontacts p:hover {
+                background-color: #ddd;
+                border-radius: 2px;
+              }
+
+              #closemore1_div_contacts {
+                position: fixed;
+                top: 0vw;
+                display: none;
+                height: 200vw;
+                width: 38vw;
+              }
+
+              #closemore2_div_contacts {
+                position: fixed;
+                display: none;
+                top: 65vw;
+                right: 0;
+                height: 200vw;
+                width: 65vw;
+              }
+            </style>
+            <script type="text/javascript">
+              function opencontacts() {
+                document.getElementById('contacts').style.transitionDuration = "0.1s";
+                document.getElementById('contacts').style.left = "0vw";
+              }
+              function closecontacts() {
+                document.getElementById('contacts').style.left = "110vw";
+              }
+              function openmorecontacts() {
+                document.getElementById('divmorecontacts').style.display = "block";
+                document.getElementById('closemore1_div_contacts').style.display = "block";
+                document.getElementById('closemore2_div_contacts').style.display = "block";
+              }
+              function closemorecontacts() {
+                document.getElementById('closemore1_div_contacts').style.display = "none";
+                document.getElementById('closemore2_div_contacts').style.display = "none";
+                document.getElementById('divmorecontacts').style.display = "none";
+              }
+            </script>
+
+          </div>
+        </div>
+      </div>
+      <!--div calls-->
+
+      <div id="calls_new">
+        <div id="contact_header">
+          <img id="contacts_back" src="icons/back.png" onclick="close_div_new_calls()">
+          <h1 id="select_contact">Select contact</h1>
+          <p id="number_of_contacts">3 contacts</p>
+          <img id="contacts_search" src="icons/ic_search.png" onclick="opensearch()">
+          <img id="contacts_more" src="icons/ic_more.png" onclick="open_more_calls()">
+        </div>
+        <div id="contacts_2nd">
+
+          <img id="new_group_photo" src="icons/new_group.png">
+          <h1 id="new_group">New group call</h1>
+          <br>
+          <img id="new_contact_photo" src="icons/new_contact.png">
+          <h1 id="new_contact">New contact</h1>
+          <br>
+          <img src="icons/profile_pic2.png" id="contact_profule_pic">
+          <h1 id="contact_name">Abinash</h1>
+          <p id="contact_about">About</p>
+          <img id="call_call" src="icons/call.png">
+          <img id="call_videocall" src="icons/video_call.png">
+          <br>
+          <img src="icons/profile_pic1.png" id="contact_profule_pic">
+          <h1 id="contact_name">Dark Rose</h1>
+          <p id="contact_about">About</p>
+          <img id="call_call" src="icons/call.png">
+          <img id="call_videocall" src="icons/video_call.png">
+          <br>
+          <img src="icons/profile_pic3.png" id="contact_profule_pic">
+          <h1 id="contact_name">Friend</h1>
+          <p id="contact_about">About</p>
+          <img id="call_call" src="icons/call.png">
+          <img id="call_videocall" src="icons/video_call.png">
+          <br>
+          <img id="contact_share" src="icons/share_black.png">
+          <h1 id="new_group">New group</h1>
+          <br>
+          <img id="contact_share" src="icons/help_black.png">
+          <h1 id="new_group">New group</h1>
+          <br>
+        </div>
+
+        <div onclick="close_more_calls()" id="div_more_calls">
+          <p>Invite a friend</p>
+          <p>Contact</p>
+          <p>Refresh</p>
+          <p>Help</p>
+        </div>
+        <div onclick="close_more_calls()" id="closemore1_div_new_calls">
+        </div>
+        <div onclick="close_more_calls()" id="closemore2_div_new_calls">
+        </div>
+        <script type="text/javascript">
+          function open_div_new_calls() {
+            document.getElementById('calls_new').style.transitionDuration = "0.1s";
+            document.getElementById('calls_new').style.left = "0vw";
+          }
+          function close_div_new_calls() {
+            document.getElementById('calls_new').style.left = "110vw";
+          }
+          function open_more_calls() {
+            document.getElementById('div_more_calls').style.display = "block";
+            document.getElementById('closemore1_div_new_calls').style.display = "block";
+            document.getElementById('closemore2_div_new_calls').style.display = "block";
+          }
+          function close_more_calls() {
+            document.getElementById('div_more_calls').style.display = "none";
+            document.getElementById('closemore1_div_new_calls').style.display = "none";
+            document.getElementById('closemore2_div_new_calls').style.display = "none";
+          }
+        </script>
+        <style type="text/css">
+          #calls_new {
+            position: fixed;
+            top: 0;
+            left: 110vw;
+            height: 100%;
+            width: 100%;
+            background-color: white;
+            transition-duration: 0.05s;
+            transition-property: left;
+          }
+
+          #call_call,
+          #call_videocall {
+            width: 8vw;
+            position: absolute;
+            margin: 6vw 0vw 0vw 42vw;
+            padding: 2vw;
+          }
+
+          #call_videocall {
+            margin: 6vw 0vw 0vw 62vw;
+          }
+
+          #call_call:hover,
+          #call_videocall:hover {
+            background-color: rgba(50, 50, 50, 0.2);
+          }
+
+          #contact_about {
+            position: absolute;
+            font-size: 4.3vw;
+            margin: 12.5vw 0vw 0vw 5vw;
+            color: gray;
+          }
+
+          #contact_share {
+            width: 8vw;
+            margin-left: 8vw;
+            margin-top: 7vw;
+          }
+
+          #div_more_calls {
+            position: fixed;
+            display: none;
+            top: 1.5vw;
+            right: 1.5vw;
+            box-shadow: 10px 10px 50px 8px rgba(30, 30, 30, 0.25);
+            color: black;
+            background-color: #fafafa;
+            height: 62vw;
+            width: 60vw;
+            z-index: 200;
+            border: 1px solid black;
+            border-radius: 3px;
+            border: none;
+          }
+
+          #div_more_calls p {
+            font-size: 4.7vw;
+            padding: 5vw 5vw;
+          }
+
+          #divmorecontacts p:hover {
+            background-color: #ddd;
+            border-radius: 2px;
+          }
+
+          #closemore1_div_new_calls {
+            position: fixed;
+            top: 0vw;
+            display: none;
+            height: 200vw;
+            width: 38vw;
+          }
+
+          #closemore2_div_new_calls {
+            position: fixed;
+            display: none;
+            top: 65vw;
+            right: 0;
+            height: 200vw;
+            width: 65vw;
+          }
+        </style>
+        <script type="text/javascript">
+          function opencontacts() {
+            document.getElementById('contacts').style.transitionDuration = "0.1s";
+            document.getElementById('contacts').style.left = "0vw";
+          }
+          function closecontacts() {
+            document.getElementById('contacts').style.left = "110vw";
+          }
+          function openmorecontacts() {
+            document.getElementById('divmorecontacts').style.display = "block";
+            document.getElementById('closemore1_div_contacts').style.display = "block";
+            document.getElementById('closemore2_div_contacts').style.display = "block";
+          }
+          function closemorecontacts() {
+            document.getElementById('closemore1_div_contacts').style.display = "none";
+            document.getElementById('closemore2_div_contacts').style.display = "none";
+            document.getElementById('divmorecontacts').style.display = "none";
+          }
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--status1 div-->
+        <div id="status1_div">
+          <div id="loading_div_status1">
+            <div id="loaded_div_status1"></div>
+          </div>
+          <img id="status_back" src="icons/back.png" onclick="close_status1()">
+          <img id="profile_photo_self_lite" src="icons/profile_photo_self_lite.png">
+          <h1 id="status_heading">My status</h1>
+          <p id="status_upload_time">1 minute ago</p>
+
+          <img src="icons/status/status1.png" id="status1_photo" onclick="close_status1()">
+          <p id="status_text">By Abinash</p>
+          <img id="status_eye" src="icons/eye.png">
+          <p id="status_viewed_no">3</p>
+
+        </div>
+        <style type="text/css">
+          #loading_div_status1 {
+            height: 0.8vw;
+            background-color: rgba(255, 255, 255, 0.4);
+            width: 97%;
+            border-radius: 5px;
+            margin: 1vw 0vw 0vw 1.5vw;
+          }
+
+          #loaded_div_status1 {
+            height: 0.8vw;
+            background-color: white;
+            width: 0vw;
+            border-radius: 5px;
+            transition-duration: 5s;
+            transition-timing-function: linear;
+            transition-property: width;
+          }
+
+          #status_back {
+            position: absolute;
+            width: 9vw;
+            padding: 1vw;
+            border-radius: 50%;
+            margin: 3vw 0vw 0vw 2vw;
+          }
+
+          #profile_photo_self_lite {
+            width: 13vw;
+            border-radius: 50%;
+            margin: 2.5vw 0vw 0vw 15vw;
+          }
+
+          #status_back:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+          }
+
+          #status_heading,
+          #status_back,
+          #status_viewed_no,
+          #status_upload_time,
+          #profile_photo_self_lite {
+            display: inline-block;
+          }
+
+          #status_heading {
+            position: absolute;
+            font-size: 5.8vw;
+            font-weight: 500;
+            margin: 2.5vw 0vw 0vw 4vw;
+          }
+
+          #status_upload_time {
+            position: absolute;
+            font-size: 4vw;
+            margin: 10vw 0vw 0vw 4vw;
+          }
+
+          #status1_photo {
+            padding: 20vw 0vw 20vw 0vw;
+            width: 100vw;
+            margin-top: 10vw;
+          }
+
+          #status_text {
+            text-align: center;
+            padding-top: 2vw;
+            background-color: rgba(255, 255, 255, 0.09);
+            padding-bottom: 2vw;
+          }
+
+          #status1_div {
+            position: fixed;
+            top: 110%;
+            left: 0%;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            color: white;
+            transition-duration: 0.1s;
+            transition-property: top;
+          }
+
+          #status_eye {
+            position: absolute;
+            text-align: center;
+            width: 7vw;
+            margin: 8vw 0vw 0vw 44vw;
+          }
+
+          #status_viewed_no {
+            position: absolute;
+            font-size: 4.5vw;
+            margin-left: 50vw;
+            margin-top: 1.1vw;
+            margin: 9.5vw 0vw 0vw 51vw;
+          }
+        </style>
+        <script type="text/javascript">
+          function clicked_status1() {
+            document.getElementById('status1_div').style.top = "0%";
+            document.getElementById('loaded_div_status1').style.transitionDuration = "5s"
+            document.getElementById('loaded_div_status1').style.width = "97vw";
+            setTimeout(function openesstatus1() {
+              close_status1();
+            }, 5000);
+          }
+          function close_status1() {
+            document.getElementById('status1_div').style.top = "110%";
+            document.getElementById('loaded_div_status1').style.transitionDuration = "0.5s"
+            document.getElementById('loaded_div_status1').style.width = "0vw";
+          }
+        </script>
+
+
+
+
+
+
+
+        <!--status2 div-->
+        <div id="status2_div">
+          <div id="loading_div_status2">
+            <div id="loaded_div_status2"></div>
+          </div>
+          <img id="status_back" src="icons/back.png" onclick="close_status2()">
+          <img id="profile_photo_self_lite" src="icons/profile_photo_self_lite.png">
+          <h1 id="status_heading">Dark Rose</h1>
+          <p id="status_upload_time">1 minute ago</p>
+
+          <img src="icons/status/dark_rose.png" id="status1_photo" onclick="close_status2()">
+          <p id="status_text">Welcome to Dark Rose</p>
+          <img id="status_reply" src="icons/arrow_up.png">
+          <p id="status_reply_txt">REPLY</p>
+
+        </div>
+        <style type="text/css">
+          #loading_div_status2 {
+            height: 0.8vw;
+            background-color: rgba(255, 255, 255, 0.4);
+            width: 97%;
+            border-radius: 5px;
+            margin: 1vw 0vw 0vw 1.5vw;
+          }
+
+          #loaded_div_status2 {
+            height: 0.8vw;
+            background-color: white;
+            width: 0vw;
+            border-radius: 5px;
+            transition-duration: 5s;
+            transition-timing-function: linear;
+            transition-property: width;
+          }
+
+          #status2_div {
+            position: fixed;
+            top: 110%;
+            left: 0%;
+            height: 100%;
+            width: 100%;
+            background-color: black;
+            color: white;
+            transition-duration: 0.1s;
+            transition-property: top;
+          }
+
+          #status_reply {
+            position: absolute;
+            text-align: center;
+            width: 4vw;
+            margin: 8vw 0vw 0vw 48vw;
+          }
+
+          #status_reply_txt {
+            position: absolute;
+            text-align: center;
+            font-size: 4vw;
+            margin: 13vw 0vw 0vw 44.5vw;
+          }
+        </style>
+        <script type="text/javascript">
+          function clicked_status2() {
+            document.getElementById('status2_div').style.top = "0%";
+            document.getElementById('loaded_div_status2').style.transitionDuration = "6s"
+            document.getElementById('loaded_div_status2').style.width = "97vw";
+            document.getElementById('recent_updates').innerHTML = "Viewed updates";
+            document.getElementById('viewed_updates').style.display = "none";
+            document.getElementById('statusprofilepic2').src = "icons/statuspp/profile_pic2_viewed.png";
+            setTimeout(function openesstatus1() {
+              close_status2();
+            }, 6000);
+          }
+          function close_status2() {
+            document.getElementById('status2_div').style.top = "110%";
+            document.getElementById('loaded_div_status2').style.transitionDuration = "0.5s"
+            document.getElementById('loaded_div_status2').style.width = "0vw";
+          }
+        </script>
+
+
+
+        <!--status3 div-->
+        <div id="status3_div" onclick="close_status3()">
+          <div id="loading_div_status3-1">
+            <div id="loaded_div_status3-2"></div>
+            <div id="loading_div_status3-3">
+              <div id="loaded_div_status3-4"></div>
+            </div>
+            <style type="text/css">
+              #loading_div_status3-1 {
+                display: inline-block;
+                height: 0.8vw;
+                background-color: rgba(255, 255, 255, 0.4);
+                width: 48vw;
+                border-radius: 5px;
+                margin: 1vw 0vw 0vw 1.5vw;
+              }
+
+              #loaded_div_status3-2 {
+                height: 0.8vw;
+                background-color: white;
+                width: 0vw;
+                border-radius: 5px;
+                transition-duration: 5s;
+                transition-timing-function: linear;
+                transition-property: width;
+              }
+
+              #loading_div_status3-3 {
+                position: absolute;
+                display: inline-block;
+                height: 0.8vw;
+                background-color: rgba(255, 255, 255, 0.4);
+                width: 48vw;
+                border-radius: 5px;
+                margin: -0.7vw 0vw 0vw 50vw;
+              }
+
+              #loaded_div_status3-4 {
+                height: 0.8vw;
+                background-color: white;
+                width: 0vw;
+                border-radius: 5px;
+                transition-duration: 5s;
+                transition-timing-function: linear;
+                transition-property: width;
+              }
+            </style>
+            <script type="text/javascript">
+              function clicked_status3() {
+                document.getElementById('loaded_div_status3-2').style.transitionDuration = "5s"
+                document.getElementById('loaded_div_status3-4').style.transitionDuration = "5s"
+                document.getElementById('status3_div').style.top = "0%";
+                document.getElementById('loaded_div_status3-2').style.width = "48vw";
+
+                setTimeout(function () {
+                  document.getElementById('status3_photo').src = "icons/status/status3-2.png"
+                  document.getElementById('loaded_div_status3-4').style.width = "48vw";
+                }, 5000);
+
+                setTimeout(function () {
+                  document.getElementById('status3_div').style.top = "110%";
+                  close_status3();
+                }, 10000);
+              }
+              function close_status3() {
+                document.getElementById('loaded_div_status3-2').style.transitionDuration = "0.5s"
+                document.getElementById('loaded_div_status3-4').style.transitionDuration = "0.5s"
+                document.getElementById('loaded_div_status3-2').style.width = "0vw";
+                document.getElementById('loaded_div_status3-4').style.width = "0vw";
+                document.getElementById('status3_photo').src = "icons/status/status3-1.png"
+                document.getElementById('status3_div').style.top = "110%";
+              }
+
+
+            </script>
+            <img id="status_back" src="icons/back.png" onclick="close_status3()">
+            <img id="profile_photo_self_lite" src="icons/profile_photo_self_lite.png">
+            <h1 id="status_heading">Abinash</h1>
+            <p id="status_upload_time">1 minute ago</p>
+
+            <img src="icons/status/status3-1.png" id="status3_photo">
+            <p id="status_text">Welcome to Dark Rose</p>
+            <img id="status_reply" src="icons/arrow_up.png">
+            <br>
+            <p id="status_reply_txt">REPLY</p>
+          </div>
+        </div>
+      </div>
+      <style type="text/css">
+        #status3_div {
+          position: fixed;
+          top: 110%;
+          left: 0%;
+          height: 100%;
+          width: 100%;
+          background-color: black;
+          color: white;
+          transition-duration: 0.1s;
+          transition-property: top;
+        }
+
+        #status3_photo {
+          padding: 0vw 0vw 0vw 0vw;
+          width: 100vw;
+          margin-top: 10vw;
+        }
+      </style>

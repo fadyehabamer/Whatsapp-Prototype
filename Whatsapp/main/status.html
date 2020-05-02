@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#075E54">
+<title>Chats</title>
+<body>
+<style type="text/css">
+*{margin:0; padding:0; font-family:orbitorn;}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+<!--status3 div-->
+<div id="status3_div" onclick="start_status3()" >
+<div id="loading_div_status3-1" >
+<div id="loaded_div_status3-2" ></div>
+<div id="loading_div_status3-3" >
+<div id="loaded_div_status3-4" ></div>
+</div>
+<style type="text/css">
+#loading_div_status3-1 {
+display:inline-block;height:0.8vw; background-color:rgba(255,255,255,0.4);width:48vw; border-radius:5px;margin:1vw 0vw 0vw 1.5vw;}
+#loaded_div_status3-2 {height:0.8vw; background-color:white;
+width:0vw; border-radius:5px;transition-duration:5s; transition-timing-function:linear;transition-property:width;}
+
+#loading_div_status3-3{
+position:absolute;
+display:inline-block;
+height:0.8vw; background-color:rgba(255,255,255,0.4);width:48vw; border-radius:5px;
+margin:-0.7vw 0vw 0vw 50vw;}
+#loaded_div_status3-4 {height:0.8vw; background-color:white;
+width:0vw; border-radius:5px;transition-duration:5s; transition-timing-function:linear;transition-property:width;}
+</style>
+<script type="text/javascript">
+function start_status3(){
+document.getElementById('status3_div').style.top="0%";
+document.getElementById('loaded_div_status3-2').style.width="48vw";
+setTimeout(function(){
+document.getElementById('status3_photo').src="icons/status/status3-2.png"
+document.getElementById('loaded_div_status3-4').style.width="48vw";
+},5000)
+setTimeout(function(){
+document.getElementById('status3_div').style.top="110%";
+},10000)
+}
+
+</script>
+<img id="status_back" src="icons/back.png" onclick="close_status2()">
+<img id="profile_photo_self_lite" src="icons/profile_photo_self_lite.png"  >
+<h1 id="status_heading" >My status</h1>
+<p id="status_upload_time" >1 minute ago</p>
+
+<img src="icons/status/status3-1.png" id="status3_photo">
+<p id="status_text" >Welcome to Dark Rose</p>
+<img id="status_reply" src="icons/arrow_up.png" >
+<p id="status_reply_txt" >REPLY</p>
+
+</div>
+<style type="text/css">
+#status3_div {position:fixed;top:0%; left:0%;height:100%; width:100%; background-color:black;color:white;transition-duration:0.1s;transition-property:top;}
+#status_reply {position:absolute;text-align:center;
+width:4vw;margin:8vw 0vw 0vw 48vw;}
+#status_reply_txt {position:absolute;text-align:center;
+font-size:4vw;margin:13vw 0vw 0vw 44.5vw;}
+#loading_div_status1 {height:0.8vw; background-color:rgba(255,255,255,0.4);width:97%; border-radius:5px;margin:1vw 0vw 0vw 1.5vw;}
+#loaded_div_status1 {height:0.8vw; background-color:white;width:0vw; border-radius:5px;transition-duration:5s; transition-timing-function:linear;transition-property:width;}
+#status_back {position:absolute;width:9vw; padding:1vw;border-radius:50%;margin:3vw 0vw 0vw 2vw;}
+#profile_photo_self_lite {width:13vw; border-radius:50%;margin:2.5vw 0vw 0vw 15vw;}
+#status_back:hover {background-color:rgba(255,255,255,0.4);}
+#status_heading,#status_back,#status_viewed_no, #status_upload_time, #profile_photo_self_lite {display:inline-block;}
+#status_heading {position:absolute;font-size:5.8vw; font-weight:500;margin:2.5vw 0vw 0vw 4vw;}
+#status_upload_time {position:absolute;font-size:4vw;margin:10vw 0vw 0vw 4vw;}
+
+
+#status3_photo {padding:0vw 0vw 0vw 0vw;width:100vw; margin-top:10vw;}
+#status_text {text-align:center;padding-top:2vw;background-color:rgba(255,255,255,0.09);padding-bottom:2vw;}
+#status1_div {position:fixed;top:110%; left:0%;height:100%; width:100%; background-color:black;color:white;transition-duration:0.1s;transition-property:top;}
+#status_eye {position:absolute;text-align:center;width:7vw;margin:8vw 0vw 0vw 44vw;}
+#status_viewed_no {position:absolute;font-size:4.5vw;margin-left:50vw;margin-top:1.1vw;margin:9.5vw 0vw 0vw 51vw;}
+</style>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="hsl(170,100%,20%)">
+<title>Camera</title>
+ 
+<style>
+*{margin:0; padding:0;font-family:orbitorn;
+}
+body {
+background:black;
+}
+
+
+#container {
+position:fixed; top:0;
+margin:0; padding:0;
+	margin: 0vw 0vw 0vw 0vw;
+    width:100vw;
+	border:none;
+	transform:scaleX(-1.7 ) scaleY(1.7);
+    transition-duration:0.2s;
+}
+#videoElement {
+margin:0; padding:0;
+	width:100%;
+	height: 100%;
+	background-color:#fff;
+}
+</style>
+</head>
+ 
+<body onclick="flash()">
+<div id="container">
+	<video autoplay="true" id="videoElement">
+	
+	</video>
+</div>
+<img id="arrow_up" src="icons/arrow_up.png" >
+<div id="imgshort" >
+<img id="img1"  src="icons/photos/img1.png" >
+<img id="img2"  src="icons/photos/img2.png" >
+<img id="img3"  src="icons/photos/img3.png" >
+<img id="img4"  src="icons/photos/img4.png" >
+<img id="img5"  src="icons/photos/img5.png" >
+</div>
+<div id="flashcam">
+<img id="flash" onclick="fl()" src="icons/flash_off.png">
+<script type="text/javascript">
+var f = 0;
+var scale = 1;
+function fl(){
+f = f + 1; scale = scale * (-1);
+var v = f % 3;
+document.getElementById('flash').style.transform="scaleX("+scale+")";
+if(v == 0){
+document.getElementById('flash').src="icons/flash_off.png";
+}
+if(v == 1){
+document.getElementById('flash').src="icons/flash_on.png";
+}
+if(v == 2){
+document.getElementById('flash').src="icons/flash_auto.png";
+}
+
+}
+
+</script>
+<img onclick="changecamera()"id="camera" src="icons/camera_flip.png" >
+</div>
+<div id="round">
+<img id="c1" onclick="capture()" src="icons/ring_no.png">
+</div>
+<script type="text/javascript">
+var i  = 0;
+function Timer() {
+ i++;
+var s = i;
+alert(m);
+  if (i < 0) {
+  }
+  else {
+    setTimeout(Timer, 1000);
+  }
+ if(i<10){
+     i= "0"+i;
+ }
+  document.getElementById('count').innerHTML = "0:" + i;
+}
+</script>
+<div id="timer" >
+<img src="icons/red_dot.png" >
+<p id="count" >0:12</p>
+</div>
+<img id="video" onclick="Timer()" src="icons/red_dot.png" >
+<style type="text/css">
+#video {
+position:fixed;
+width:15vw;
+bottom:-4vw; right:-4vw;
+}
+
+</style>
+<style type="text/css">
+#timer {
+position:fixed;
+top:20vw; left:39.5vw;
+width:21vw; height:8vw;
+background:rgba(10,10,10,0.5);
+color:white;
+border-radius:200px;
+}
+#timer img {
+position:absolute;
+display:inline-block;
+width:5vw;  margin:1.5vw 0vw 0vw 1.5vw;
+}
+#count{
+position:absolute;
+display:inline-block;
+width:5vw;  margin:1.2vw 0vw 0vw 8.5vw;
+}
+</style>
+</script>
+<p id="holdfor">Hold for video, tap for photo</p>
+<div id="fullnotification" >
+<div id="notification" >
+<h1 id="enabled" >Full screen is enabled</h1>
+<p id="mininoti" >•  It will hide your status bar.</p>
+<p id="mininoti" >•  When fullscreen is enabled press back to exit
+   FullScreen.</p>
+<p id="mininoti" >•  FullScreen mode is very good to access 
+   camera. I recommend to use FullScreen.</p> 
+
+<button onclick="no()" id="no">I don't want FullScreen</button>
+
+</div>
+<button onclick="ok()" id="ok">Got it</button>
+</div>
+</div>
+
+<div id="whiteborder" >
+</div>
+<style type="text/css">
+#whiteborder{
+position:fixed;
+height:96vh; width:94vw;
+background:transparent; 
+border:0vw solid white;
+z-index:99990; transition-duration:5s;
+display:none;
+border-width:0vw;
+}
+#c1:hover {
+background-color:red;
+transform:scaleX(1.2) scaleY(1.2);
+}
+</style>
+<script type="text/javascript">
+function capture(){
+document.getElementById('whiteborder').style.display="block";
+document.getElementById('whiteborder').style.borderWidth="3vw";
+
+document.getElementById('c1').style.backgroundColor="red";
+document.getElementById('c1').style.transform="scaleX(1.2) scaleY(1.2)";
+setTimeout(function(){
+document.getElementById('whiteborder').style.display="none";
+document.getElementById('c1').style.backgroundColor="transparent";
+document.getElementById('c1').style.transform="scaleX(1) scaleY(1)";
+
+},200);
+}
+
+</script>
+
+
+
+
+
+<style type="text/css">
+#round  {
+position:absolute;
+margin-top:140vw;
+}
+#green {
+border:3px solid red;
+}
+#c1 {
+position:absolute;
+margin-top:8vw;
+width:20vw;
+margin-left:39.5vw;
+border-radius:50%;
+border:2.5px solid white;
+transition-duration:0.1s;
+transition-property:transform;
+}
+#holdfor {
+position:fixed;
+text-align:center;
+font-size:4vw;
+width:70vw;
+left:15vw; 
+bottom:1vw;
+color:white;
+}
+#imgshort {
+}
+#arrow_up {
+position:fixed;
+width:4vw;
+display:block;
+margin-left:auto; margin-right:auto;
+margin-top:106vw; margin-left:43vw;
+padding:5.7vw 5vw 5.7vw 5vw;
+border-radius:50%;
+}
+#arrow_up:hover {
+background:rgb(255,255,255,0.3);
+}
+#imgshort img {
+position:fixed;
+width:21.5vw; margin-top:120vw;
+}
+#img1{
+margin-left: 2vw;
+}
+#img2{
+margin-left:25.5vw;
+}
+#img3{
+margin-left: 49vw;
+}
+#img4 {
+margin-left:72.5vw;
+}
+#img5{
+margin-left:96vw;
+}
+
+#flash, #camera {
+position:absolute;
+margin-top:155vw;
+display:inline-block;
+width:11vw;
+}
+#flash {
+margin-left:15vw;
+transition-duration:0.2s;
+transition-property:transform;
+}
+#camera {
+margin-left:75vw;
+transition-duration:0.5s;
+transition-property:transform;
+
+}
+#camera :hover {
+transform:scaleX(-1);
+}
+</style>
+<script type="text/javascript">
+var i = 1;
+function changecamera(){
+i = i *(-1)
+if(i == 1){
+document.getElementById('camera').style.transform="scaleX(-1)";
+document.getElementById('container').style.transform="scaleX(-1.7) scaleY(1.7)";
+}else{
+document.getElementById('camera').style.transform="scaleX(1)";
+document.getElementById('container').style.transform="scaleX(1.7) scaleY(1.7)";
+document.getEleme
+}
+}
+</script>
+<script type="text/javascript">
+
+</script>
+<!--notification-->
+
+<style type="text/css">
+#fullnotification {
+position:fixed;
+bottom:-85vw;
+height:0vw; width:100vw;
+transition-duration:0.2s;
+transition-property:bottom;
+transition-timing-function:ease-in-out;
+}
+
+#notification {
+background-color:rgba(100%,100%,100%,0.75);
+height:65vw;
+width:95vw;
+margin-left:2.5vw;
+border-radius:10px;
+}
+#enabled {
+position:relative;
+padding-top:5vw; margin-left:5vw; 
+margin-bottom:2vw;
+}
+#mininoti {
+color:#333;
+margin-left:6.5vw; margin-right:8vw;
+font-size:4vw;
+white-space:pre;
+}
+#ok{
+height:15vw;
+width:95vw;
+margin-left:2.5vw;
+border:none; outline:none;
+border-radius:10px;
+color:dodgerblue; background:white;
+font-size:5.7vw; font-weight:500;
+bottom:2.5vw; position:absolute;
+}
+#no{
+height:15vw;
+width:85vw;
+margin-left:5vw;
+border:none; outline:none;
+border-radius:10px;
+color:white; background:rgb(30,144,255);
+font-size:5.7vw; font-weight:500;
+bottom:26vw; position:absolute;
+}
+#no:hover {
+background-color:rgba(30,144,255,0.75);
+}
+#ok:hover {
+background-color:rgba(100%,100%,100%,0.75);
+}
+#enabled {
+font-size:7vw;
+}
+
+</style>
+<script>
+var elem = document.documentElement;
+function ok(){
+
+
+  document.getElementById('fullnotification').style.transitionDuration="0.3s"
+ document.getElementById('fullnotification').style.bottom="-85vw";
+   //document.getElementById('fullnotification').style.height="0vw";
+/* View in Fullscreen */
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+
+setTimeout(function(){
+ document.getElementById('fullnotification').style.bottom="0";
+  document.getElementById('fullnotification').style.height="85vw";
+}, 1000);
+
+function no(){
+document.getElementById('fullnotification').style.transitionDuration="0.3s"
+ document.getElementById('fullnotification').style.bottom="-85vw";
+}
+</script>
+<img src="icons/fullscreen_off.png" id="full"  onclick="ok()">
+<style type="text/css">
+#full {
+position:fixed;
+z-index:9999999999999999999999999999;
+padding:5vw;
+width:8vw;
+bottom:-2vw; left:-2vw;
+border-radius:50%;
+}
+#full:hover {
+background-color:rgba(20%,0%,0%,0.1);
+}
+
+</style>
+
+</body>
+</html>

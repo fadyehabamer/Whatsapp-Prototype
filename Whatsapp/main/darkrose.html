@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="hsl(170,100%,20%)">
+<link rel="stylesheet" href="styles.css">
+<title>Dark Rose</title>
+</head>
+<body onclick="ok()">
+ <div id="header" >
+ <img id="back"  src="icons/back.png" >
+ <img id="profile_photo" src="icons/profile_pic1.png" >
+ <h1 id="contact_name" >Dark Rose</h1>
+ <img id="videocall_logo" src="icons/videocall_white.png"  >
+  <img id="call_logo" src="icons/call_white.png"  >
+  <img id="more" src="icons/ic_more.png"  >
+ </div>
+ 
+<div id="div_2" >
+<br>
+<p id="today" >TODAY</p>
+<br>
+<div class="me chatme" ><p id="msgme" >Hello</p><p id="time_dm" >    12:10 PM</p>
+</div>
+</div>
+<br><br><br><br><br>
+<style type="text/css">
+#tick {
+width:4.5vw;
+position:absolute;
+bottom:7px;
+right:7px;
+}
+#today {
+background-color:hsl(199,100%,90%);
+box-shadow: 1px 1px 2px 1px #cccccc;
+margin:auto;
+width:14vw;
+text-align:center;
+padding:2vw 0vw 2vw 0vw;
+border-radius:8px;
+font-size:3vw; font-weight:500;
+color:#555;
+}
+.dm {
+margin: 10px;
+background:hsl(93,71%,85%);
+padding: 3px 2px 4px 3px;
+text-align:left;
+font-weight: 400;
+color: #fff;
+box-shadow: 1px 1px 3px 1px #cccccc;
+position:relative;
+border-radius:5px;
+margin-left:50vw;
+}
+.me {
+margin-left:5vw;
+background:white;
+padding: 3px 2px 4px 3px;
+text-align:left;
+font-weight: 400;
+color: #fff;
+box-shadow: 1px 1px 3px 1px #cccccc;
+position:relative;
+border-radius:5px;
+white-space:nowrap;
+margin-right:55vw;
+
+}
+#msgdm, #time_dm,#msgme,#time_me   {
+display:inline-block;
+white-space:pre;
+}
+#time_dm{
+font-size:3.1vw;
+color:#999;
+font-weight:500;
+position:absolute;
+bottom:5px;
+right:5px;
+}
+#time_me{
+font-size:3.1vw;
+color:#999;
+font-weight:500;
+position:absolute;
+bottom:5px;
+right:25px;
+}
+#msgdm {
+color:black;
+font-size:4.2vw;
+font-weight:400;
+padding-left:5px;
+padding:3px 0px 1px 5px;
+}
+#msgme {
+color:black;
+font-size:4.2vw;
+font-weight:400;
+padding-left:5px;
+padding:3px 0px 3px 5px;
+}
+.chat:after{
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid hsl(93,71%,85%);
+  border-bottom: 10px solid transparent;
+  right: -10px;
+  top: 0px;
+  border-radius:2px;
+}
+.chatme:after{
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white;
+  border-bottom: 10px solid transparent;
+  left: -10px;
+  top: 0px;
+  border-radius:2px;
+}
+</style>
+
+
+
+
+
+
+
+
+<style type="text/css">
+#div_2 {
+margin-top:19vw;
+}
+*{margin:0; padding:0; font-family:orbitorn}
+body {
+background:url("icons/wallpaper.png");
+background-repeat:no-repeat;
+background-attachment:fixed;
+background-size:cover;
+}
+#header {
+position:fixed; top:0;
+background-color:#075E54;
+height:18vw; width:100%;
+color:white;
+box-shadow: 3px 3px 3px 0px #cccccc;
+z-index:200;
+}
+#back,#contact_name  {
+display:inline-block;
+}
+#contact_name {
+font-size:6vw; 
+font-weight:500;
+margin:5.5vw 0vw 0vw 13vw;
+position:absolute;;
+}
+#back {
+width:8vw;
+padding:1vw; border-radius:50%;
+margin:4vw 0vw 0vw 1vw;
+}
+#back:hover {
+background-color:rgba(255,255,255,0.4);
+}
+#videocall_logo, #call_logo, #more {
+position:absolute;
+width:7.5vw;
+}
+#videocall_logo,#call_logo, #more {
+margin:3.2vw 0vw 0vw 50vw;
+padding:2vw;
+border-radius:50%;
+}
+#videocall_logo:hover, #call_logo:hover,#more:hover {
+background-color:rgba(255,255,255,0.3);
+}
+#call_logo {
+margin-left:64vw;
+}
+#more {
+margin-left:77vw;
+}
+#profile_photo {
+position:absolute;
+width:12vw;
+margin-top:3vw; margin-left:-1vw;
+}
+
+
+</style>
+
+<div id="div_input" >
+<img id="emoji" src="icons/emoji.png" onclick="clickedemoji()" >
+<textarea id="input" onclick="kbd()" placeholder="Type a message" oninput="inputs()" ></textarea>
+<img id="pin" src="icons/pin.png"  onclick="focuss()" >
+<img id="camera" src="icons/ic_camera_black.png" onclick="window.history.back();">
+</div>
+
+<div id="div_send" onclick="sendmsg()">
+ <img src="icons/mic.png" id="send" >
+</div>
+<script type="text/javascript">
+function sendmsg(){
+var msg = document.getElementById('input').value;
+if(msg == 0){
+}else{
+document.getElementById('input').focus();
+document.getElementById('div_2').innerHTML+='<div class="dm chat"><p id="msgdm" >'+msg+'</p><p id="time_me" >  12:10 PM</p><img id="tick" class="black" src="icons/tick_dbl_blue.png"></div>';
+document.getElementById('input').value="";
+var x = document.getElementById('input').value;
+scroleend();
+document.getElementById('send').src="icons/mic.png";
+document.getElementById('pin').style.left="57vw";
+document.getElementById('camera').style.left="70vw";
+switch(msg){
+case "Hey" : sendto("Hello"); break;
+case "Hi" : sendto("Hello"); break;
+case "Hello" : sendto("Hi"); break;
+case "How are you?" : sendto("I am fine.")
+                     setTimeout(function(){
+                     sendto("how are you?");
+                     }, 600);
+                     setTimeout(function(){
+                     sendto("nice.");
+                     }, 7000);
+                     ;break;
+case "Who are you?" : sendto("I am Dark Rose</br>a software made<br>by Abinash");
+        setTimeout(function(){
+        sendto("your name?");
+        }, 1000);
+       setTimeout(function(){
+       sendto("Nice to meet you");
+       }, 7000);
+       break;
+case "Bye" : sendto("Okk bye bye.<br> Have a good day.");break;
+case "Bye." : sendto("Okk bye bye.<br>Have a good <br> day.");break;
+}
+}
+}
+function sendto(i){
+setTimeout(function(){
+scroleend();
+document.getElementById('div_2').innerHTML+='<div class="me chatme" ><p id="msgme" >'+ i + '</p></div> <br>';
+}, 1000);
+scroleend();
+}
+
+</script>
+<script type="text/javascript">
+function focuss(){
+document.getElementById('input').focus();
+
+}
+function inputs(){
+var x = document.getElementById('input').value;
+if(x.length == 0){
+document.getElementById('send').src="icons/mic.png";
+document.getElementById('pin').style.left="57vw";
+document.getElementById('camera').style.left="70vw";
+}
+if(x.length > 0){
+document.getElementById('send').src="icons/send.png";
+document.getElementById('pin').style.left="70vw";
+document.getElementById('camera').style.left="83vw";
+  }
+}
+
+</script>
+<style type="text/css">
+#div_bottom, #div_input,#emoji, #input,#pin,#camera,#div_send,#send {
+display:inline-block;
+}
+#div_input {
+background-color:#fff;
+position:fixed;
+bottom:5px;
+left:3px;
+width:81vw;
+height:13.5vw;
+border-radius:50px;
+box-shadow: 1px 1px 1px 0px #cccccc;
+border:0.4px solid #ddd;
+
+
+}
+#div_send {
+position:fixed;
+bottom:5px;
+right:5px;
+height:14.5vw;
+background-color:hsl(170,100%,28%);
+width:14.5vw;
+border-radius:50%;
+box-shadow: 1px 1px 1px 0px #cccccc;
+z-index:200;
+}
+#emoji {
+width:8vw;
+position:absolute;
+top:2.75vw;
+left:2.5vw;
+opacity:0.8;
+}
+#input {
+position:absolute;
+width:53vw;
+height:10vw;
+left:13vw; top:3.5vw;
+height:5vw;
+outline:none;
+border:none;
+font-size:5vw;
+caret-color: hsl(170,100%,30%);
+}
+input::placeholder{
+color:#a9a9a9;
+font-size:5vw;
+}
+#send {
+width:6.5vw;
+margin-left:4vw;
+margin-top:4vw;
+}
+#pin, #camera {
+position:absolute;
+width:7.3vw;
+}
+#pin{
+top:3vw; left:57vw;
+transition-duration:0.1s;
+transition-property:left;
+}
+#camera {
+top:3vw; left:70vw;
+opacity:0.5;
+transition-duration:0.1s;
+transition-property:left;
+}
+</style>
+
+<div id="emojidiv" >
+<h1 id="emojinoti"> Emojis are not available<br>right now.</h1>
+<img id="bigemoji" src="icons/emoji_searching.png" >
+<p id="emojinoti1">Will be available in next versions.</p>
+</div>
+
+<style type="text/css">
+#emojidiv {
+position:fixed;
+width:100%;
+background-color:#e8ffe8;
+height:70vw;
+bottom:0vw;
+display:none;
+}
+#emojinoti {
+text-align:center;
+font-size:8vw;
+font-weight:400;
+padding-top:10vw;
+}
+#bigemoji {
+width:20vw;
+margin-left:40vw;
+margin-top:3vw;
+}
+#emojinoti1 {
+color:#666666;
+font-size:4.3vw;
+text-align:center;
+margin-top:10vw;
+}
+</style>
+
+
+<script type="text/javascript">
+var i =1;
+function clickedemoji(){
+i = i * (-1);
+if(i == -1){
+emoji();
+}
+if(i == 1){
+kbd();
+}
+}
+function emoji(){
+document.getElementById('emoji').src="icons/ic_keyboard.png"
+document.getElementById('div_input').style.bottom="71vw";
+document.getElementById('div_send').style.bottom="71vw";
+document.getElementById('input').blur();
+setTimeout(function(){
+document.getElementById('emojidiv').style.display="block";
+},100);
+}
+function kbd(){
+scroleend();
+document.getElementById('emoji').src="icons/emoji.png"
+document.getElementById('input').focus();
+document.getElementById('emojidiv').style.display="none";
+setTimeout(function(){
+document.getElementById('div_input').style.bottom="5px";
+document.getElementById('div_send').style.bottom="5px";
+},100);
+}
+
+
+
+function scroleend(){
+window.scrollTo(0,999999999999999999999);
+}
+</script>
+<script type="text/javascript">
+var elem = document.documentElement;
+function ok(){
+
+/* View in fullscreen */
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+
+
+
+
+
+
+
+</script>
+
+</script>
+
+
+
+
+</body>
+</html>
