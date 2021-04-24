@@ -5,4 +5,5 @@
  * Css3 
  * Pure JS
  > ***Responsive ONLY on small screens***
+ <br>
  >  ***NOT responsive on large screen***
